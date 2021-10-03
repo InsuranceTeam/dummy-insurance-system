@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/wc_input")
+@RequestMapping("/wc/input")
 public class WcInputController {
 
   @GetMapping
