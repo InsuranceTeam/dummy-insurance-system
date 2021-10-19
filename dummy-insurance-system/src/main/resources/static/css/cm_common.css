@@ -53,10 +53,13 @@ h1, h2, h3, h4, h5, h6,dl,dt,dd{
   background: #fff;
   font-size: 2.1rem;
   border-bottom: 1px solid green;
+  display: flex;
+  justify-content: space-between;
+  height:50px;
 }
 .Header__inner{
   display: flex;
-  width: 1040px;
+  width: 100%;
   margin: 0px 20px;
   align-items: center;
   justify-content: space-between;
