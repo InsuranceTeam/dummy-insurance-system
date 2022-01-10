@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/wc_common.css" />
+    <link rel="stylesheet" href="/css/cm_common.css"/>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+
+    <!-- jQuery -->
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <!-- jQuery UI -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+    <!-- jQuery local -->
+
+    <title>終身医療（加入）　確認画面</title>
+  </head>
+
+  <body>
+    <!--  <div class="system-name">ダミー保険事務処理システム</div> -->
+    <header class="Header">
+      <div class="Header__inner">
+        <a href="/cm/task">ダミー保険事務処理システム</a>
+          <form th:method="get" th:action="@{/wc/input}" th:object="${wcInput}" >
+            <input name="nameKanjiSei" type="hidden" th:value="*{nameKanjiSei}">
+            <input name="nameKanjiMei" type="hidden" th:value="*{nameKanjiMei}">
+            <input name="nameKanaSei" type="hidden" th:value="*{nameKanaSei}">
+            <input name="nameKanaMei" type="hidden" th:value="*{nameKanaMei}">
+            <input name="birthDay" type="hidden" th:value="*{birthDay}">
+            <input name="seibetsu" type="hidden" th:value="*{seibetsu}">
+            <input name="kanyuBi" type="hidden" th:value="*{kanyuBi}">
+            <input name="nyuinNichigaku" type="hidden" th:value="*{nyuinNichigaku}">
+            <input name="haraikomiManryoNenrei" type="hidden" th:value="*{haraikomiManryoNenrei}">
+            <input name="haraikomiHoho" type="hidden" th:value="*{haraikomiHoho}">
+            <button class="btn btn-link btn-link-return btn_large">戻る</button>
+          </form>
+      </div>
+    </header>
+
+     <div class="container">
+         <div class="title">終身医療（加入）　確認画面</div>
+     </div>
+
+
+    <div class="container">
+    <div id="inputArea">
+      <form th:method="post" th:action="@{/wc/completion}" th:object="${wcConfimation}" class="Form-wrap">
+        <div class="card-body wc_input_area">
+
+          <div class=" row input_row border_top_row">
+            <div class="input_title top_row_radius">
+              <div class="control-label input_title_label" >被保険者氏名（漢字）</div>
+            </div>
+            <div class="input_form" id="nameKanji">
+              <div th:text="|*{nameKanjiSei} 　 *{nameKanjiMei}|">
+              </div>
+              <input name="nameKanjiSei" type="hidden" th:value="*{nameKanjiSei}">
+              <input name="nameKanjiMei" type="hidden" th:value="*{nameKanjiMei}">
+            </div>
+          </div>
+          <div class="row input_row border_middle_row">
+            <div class="input_title">
+              <div class="control-label input_title_label">被保険者氏名（カナ）</div>
+            </div>
+            <div class="input_form" id="nameKana">
+              <div th:text="|*{nameKanaSei} 　 *{nameKanaMei}|">
+              </div>
+              <input name="nameKanaSei" type="hidden" th:value="*{nameKanaSei}">
+              <input name="nameKanaMei" type="hidden" th:value="*{nameKanaMei}">
+            </div>
+          </div>
+          <div class=" row input_row border_middle_row">
+            <div class="input_title">
+              <div class="control-label input_title_label">被保険者生年月日</div>
+            </div>
+            <div class="input_form" id="birthDay">
+              <div th:text="|*{birthDay}">
+              </div>
+              <input name="birthDay" type="hidden" th:value="*{birthDay}">
+            </div>
+          </div>
+          <div class="row input_row border_middle_row">
+            <div class="input_title">
+              <div class="control-label input_title_label" >被保険者性別</div>
+            </div>
+            <div class="input_form" id="seibetsu">
+              <div th:if="*{seibetsu=='1'}"><div th:text="男性"></div></div>
+              <div th:if="*{seibetsu=='2'}"><div th:text="女性"></div></div>
+              <input name="seibetsu" type="hidden" th:value="*{seibetsu}">
+            </div>
+          </div>
+          <div class="row input_row border_middle_row">
+            <div class="input_title">
+              <div class="control-label input_title_label" >加入日</div>
+            </div>
+            <div class="input_form" id="kanyuBi">
+              <div th:text="|*{kanyuBi}">
+              </div>
+              <input name="kanyuBi" type="hidden" th:value="*{kanyuBi}">
+            </div>
+          </div>
+          <div class="row input_row border_middle_row">
+            <div class="input_title">
+              <div class="control-label input_title_label" >加入年齢</div>
+            </div>
+            <div class="input_form" id="entryAge">
+              <div th:text="|*{entryAge}">
+              </div>
+              <input name="entryAge" type="hidden" th:value="*{entryAge}">
+            </div>
+          </div>
+          <div class="row input_row border_middle_row">
+            <div class="input_title">
+              <div class="control-label input_title_label" >払込方法</div>
+            </div>
+            <div class="input_form" id="haraikomiHoho">
+              <div th:if="*{haraikomiHoho=='1'}"><div th:text="月払"></div></div>
+              <div th:if="*{haraikomiHoho=='3'}"><div th:text="年払"></div></div>
+              <input name="haraikomiHoho" type="hidden" th:value="*{haraikomiHoho}">
+            </div>
+          </div>
+          <div class="row input_row border_middle_row">
+            <div class="input_title">
+              <div class="control-label input_title_label">払込満了年齢</div>
+            </div>
+            <div class="input_form" id="haraikomiManryoNenrei">
+              <div th:if="*{haraikomiManryoNenrei==60}"><div th:text="60歳"></div></div>
+              <div th:if="*{haraikomiManryoNenrei==99}"><div th:text="終身"></div></div>
+              <input name="haraikomiManryoNenrei" type="hidden" th:value=*{haraikomiManryoNenrei}>
+            </div>
+          </div>
+          <div class="row input_row border_bottom_row">
+            <div class="input_title bottom_row_radius">
+              <div class="control-label input_title_label" >入院日額</div>
+            </div>
+            <div class="input_form" id="nyuinNichigaku">
+              <div th:text="|*{nyuinNichigaku}　万円|"></div>
+              <input name="nyuinNichigaku" type="hidden" th:value="*{nyuinNichigaku}" />
+            </div>
+          </div>
+        </div> <!-- wc_input_area 終わり  -->
+        
+        <br>
+        
+        <div class="card-body wc_kakekin_area">
+          <div class="display_premium_area premium_area_border">
+            <div class="input_premium top_row_radius">
+              <div class="control-label input_title_label" >掛け金</div>
+            </div>
+            <div class="input_premium" id="premium">
+              <div th:text="|*{premium}  円|">
+              </div>
+              <input name="premium" type="hidden" th:value="*{premium}">
+            </div>
+          </div>
+        </div>
+
+        <div id="entry" class="entry_btn_area">
+          <button id="entryBtn" class="entry_btn">加入</button>
+        </div>
+
+      </form>
+    </div>
+    </div>
+
+</body>
+</html>

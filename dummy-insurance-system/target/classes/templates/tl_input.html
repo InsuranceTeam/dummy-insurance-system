@@ -1,10 +1,135 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.log">
 <head>
 <meta charset="UTF-8">
-<title>定期生命　入力画面</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/css/cm_common.css" />
+<link rel="stylesheet" href="/css/tl_input.css" />
+
+<title>定期生命 入力画面</title>
 </head>
 <body>
-定期生命の入力画面はここに作成願います
+
+	<header class="Header">
+		<div class="Header__inner">
+			<a href="/cm/task">ダミー保険事務処理システム</a>
+		</div>
+	</header>
+	<Form th:method="POST" th:action="@{/tl/input}" th:object="${tlInput}">
+		<div class="screen">
+			<Label class="title">定期生命 加入</Label><Label class="subTitleInput">入力</Label><Label class="subTitleConfirm" active>確認</Label><Label class="subTitleCompletion">完了</Label>
+			<div class="main">
+				<div class="form-group">
+					<div class="column">
+						<label class="columnName">被保険者氏名（漢字）</label>
+						<input type="text" spellcheck="false" th:field="*{insured_person_name_kanji}">
+					</div>
+					<div class="column">
+						<label class="columnName">被保険者氏名（カナ）</label>
+						<input type="text" spellcheck="false" th:field="*{insured_person_name_kana}">
+						<label class="message" th:text="*{insured_person_name_kana_error}"></label>
+					</div>
+					<div class="column">
+						<label class="columnName">被保険者生年月日</label>
+						<div class="line">
+							<input type="tel" maxlength='4' class="four" th:field="*{insured_person_birth_year}" spellcheck="false">
+							<label class="subname">年</label>
+							<input type="tel" maxlength='2' spellcheck="false" class="two" th:field="*{insured_person_birth_month}">
+							<label class="subname">月</label>
+							<input type="tel" width="25" maxlength='2' class="two" th:field="*{insured_person_birth_day}" spellcheck="false">
+							<label class="subname">日</label>
+						</div>
+						<label class="message" th:text="*{insured_person_birth_error}"></label>
+					</div>
+					<div class="column">
+						<label class="columnName">被保険者性別</label>
+						<div class="selectButton">
+							<input type="radio" name="s2" id="male" value="1" th:field="*{insured_person_sex}" checked="">
+							<label for="male" class="switch-on">男性</label>
+							<input type="radio" name="s2" id="female" value="2" th:field="*{insured_person_sex}">
+							<label for="female" class="switch-off">女性</label>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="column">
+						<label class="columnName">加入日</label>
+						<div class="line">
+							<input type="tel" maxlength='4' class="four" th:field="*{start_year}" spellcheck="false">
+							<label class="subname">年</label>
+							<input type="tel" maxlength='2' class="two" th:field="*{start_month}" spellcheck="false">
+							<label class="subname">月</label>
+							<input type="tel" width="25" maxlength='2' class="two" th:field="*{start_day}" spellcheck="false">
+							<label class="subname">日</label>
+						</div>
+						<label class="message" th:text="*{start_error}"></label>
+					</div>
+					<div class="column">
+						<label class="columnName">払込方法</label>
+						<div class="selectButton">
+							<input type="radio" name="s3" id="type1" value="1" th:field="*{payment_method}" checked="">
+							<label for="type1">月払</label>
+							<input type="radio" name="s3" id="type2" value="3" th:field="*{payment_method}">
+							<label for="type2">年払</label>
+						</div>
+					</div>
+					<div class="column">
+						<label class="columnName">契約期間</label>
+						<div class="selectButton">
+							<input type="radio" name="s4" id="period1" value="5" th:field="*{contract_period}" checked="">
+							<label for="period1">５年</label>
+							<input type="radio" name="s4" id="period2" value="10" th:field="*{contract_period}">
+							<label for="period2">10年</label>
+						</div>
+					</div>
+					<div class="column">
+						<label class="columnName">死亡保険金</label>
+						<div class="select">
+							<span class="placeholder" th:text="|*{insurance_money}万円|"></span>
+							<ul>
+								<li data-value="100">100万円</li>
+								<li data-value="200">200万円</li>
+								<li data-value="300">300万円</li>
+								<li data-value="400">400万円</li>
+								<li data-value="500">500万円</li>
+								<li data-value="600">600万円</li>
+								<li data-value="700">700万円</li>
+								<li data-value="800">800万円</li>
+								<li data-value="900">900万円</li>
+								<li data-value="1000">1000万円</li>
+								<li data-value="1100">1100万円</li>
+								<li data-value="1200">1200万円</li>
+								<li data-value="1300">1300万円</li>
+								<li data-value="1400">1400万円</li>
+								<li data-value="1500">1500万円</li>
+								<li data-value="1600">1600万円</li>
+								<li data-value="1700">1700万円</li>
+								<li data-value="1800">1800万円</li>
+								<li data-value="1900">1900万円</li>
+								<li data-value="2000">2000万円</li>
+								<li data-value="2100">2100万円</li>
+								<li data-value="2200">2200万円</li>
+								<li data-value="2300">2300万円</li>
+								<li data-value="2400">2400万円</li>
+								<li data-value="2500">2500万円</li>
+								<li data-value="2600">2600万円</li>
+								<li data-value="2700">2700万円</li>
+								<li data-value="2800">2800万円</li>
+								<li data-value="2900">2900万円</li>
+								<li data-value="3000">3000万円</li>
+							</ul>
+							<input type="hidden" name="changeme" th:field="*{insurance_money}" />
+						</div>
+					</div>
+					<div class="buttons">
+						<Button class="confirmButton">確認</Button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</Form>
+	<script src="/js/jquery-3.6.0.min.js"></script>
+	<script src="/js/tl_input.js"></script>
 </body>
 </html>

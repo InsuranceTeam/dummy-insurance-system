@@ -1,10 +1,232 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>定期医療　入力画面</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/css/tc_common.css" />
+<link rel="stylesheet"
+	href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+
+<!-- jQuery -->
+<script src="/js/jquery-3.6.0.min.js"></script>
+<!-- jQuery UI -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+<!-- jQuery local -->
+<script src="/js/tc_input.js"></script>
+
+<title>定期医療 入力画面</title>
 </head>
 <body>
-定期医療の入力画面はここに作成願います
+	<header class="Header">
+		<div class="Header__inner">
+			<a href="/cm/task">ダミー保険事務処理システム</a>
+			<form th:method="get" th:action="@{/cm/security}">
+				<button class="btn btn-link btn-link-return">戻る</button>
+			</form>
+		</div>
+	</header>
+	<div class="container">
+		<div class="card card-primary mb-3">
+			<div class="card-header">
+				<h5 class="card-title">定期医療 新規加入</h5>
+			</div>
+			<div class="l-base">
+				<form th:method="post" th:action="@{/tc/confirmation}"
+					th:object="${TcInput}">
+					<div class="Box-flame">
+						<table class="Form-tbl">
+							<tbody>
+
+								<tr class="Form-tbl__tr">
+									<th class="Form-tbl__th">
+										<div class="Form-name">被保険者氏名（漢字）</div>
+									</th>
+
+									<td class="Form-tbl__td">
+										<div class="Date-box">
+											<label class="Date-name">姓 <input
+												class="form-control" type="text"
+												name="insured_person_name_kanji_sei"
+												th:value="*{insured_person_name_kanji_sei}" /></label> <label
+												class="Date-name">名 <input class="form-control"
+												type="text" name="insured_person_name_kanji_mei"
+												th:value="*{insured_person_name_kanji_mei}" /></label>
+											<div class="text-danger"
+												th:if="${#fields.hasErrors('insured_person_name_kanji_sei')}"
+												th:errors="*{insured_person_name_kanji_sei}"></div>
+											<div class="text-danger"
+												th:if="${#fields.hasErrors('insured_person_name_kanji_mei')}"
+												th:errors="*{insured_person_name_kanji_mei}"></div>
+										</div>
+									</td>
+								</tr>
+								<tr class="Form-tbl__tr">
+									<th class="Form-tbl__th">
+										<div class="Form-name">
+											被保険者氏名（カナ）<span class="Ico-must">必須</span>
+										</div>
+									</th>
+									<td class="Form-tbl__td">
+										<div class="Date-box">
+											<label class="Date-name">セイ<input
+												class="form-control" type="text"
+												name="insured_person_name_kana_sei"
+												th:value="*{insured_person_name_kana_sei}" /></label> <label
+												class="Date-name">メイ<input class="form-control"
+												type="text" name="insured_person_name_kana_mei"
+												th:value="*{insured_person_name_kana_mei}" /></label>
+											<div class="text-danger"
+												th:if="${#fields.hasErrors('insured_person_name_kana_sei')}"
+												th:errors="*{insured_person_name_kana_sei}"></div>
+											<div class="text-danger"
+												th:if="${#fields.hasErrors('insured_person_name_kana_mei')}"
+												th:errors="*{insured_person_name_kana_mei}"></div>
+										</div>
+									</td>
+								</tr>
+
+								<tr class="Form-tbl__tr">
+									<th class="Form-tbl__th">
+										<div class="Form-name">
+											被保険者生年月日<span class="Ico-must">必須</span>
+										</div>
+									</th>
+									<td class="Form-tbl__td">
+										<div class="Date-box">
+
+											<input class="Input Input--w01 datepicker_birth" type="date"
+												value="" min="1900-01-01" max="9999-12-31"
+												name="insured_person_birth_date"
+												th:value="*{insured_person_birth_date}" />
+										</div>
+										<div class="text-danger"
+											th:if="${#fields.hasErrors('insured_person_birth_date')}"
+											th:errors="*{insured_person_birth_date}"></div>
+									</td>
+								</tr>
+								<tr class="Form-tbl__tr">
+									<th class="Form-tbl__th">
+										<div class="Form-name">
+											被保険者性別<span class="Ico-must">必須</span>
+										</div>
+									</th>
+
+									<td class="Form-tbl__td">
+
+										<div class="Date-box Date-box--w01">
+
+											<input id="sex_man" name="insured_person_sex" type="radio"
+												value="1" class="Input-radio"
+												th:checked="*{insured_person_sex != '2'}"> <label
+												for="sex_man" class="Input Input--w03 Label-radio">男性</label>
+
+											<input id="sex_woman" name="insured_person_sex" type="radio"
+												value="2" class="Input-radio"
+												th:checked="*{insured_person_sex == '2'}"> <label
+												for="sex_woman" class="Input Input--w03 Label-radio">女性</label>
+
+										</div>
+									</td>
+								</tr>
+								<tr class="Form-tbl__tr">
+									<th class="Form-tbl__th">
+										<div class="Form-name">
+											加入日<span class="Ico-must">必須</span>
+										</div>
+									</th>
+									<td class="Form-tbl__td">
+										<div class="Date-box">
+
+											<input class="Input Input--w01 datepicker_start" type="date"
+												value="" min="1900-01-01" max="9999-12-31"
+												name="contract_date" th:value="*{contract_date}" />
+											<div class="text-danger"
+												th:if="${#fields.hasErrors('contract_date')}"
+												th:errors="*{contract_date}"></div>
+										</div>
+									</td>
+								</tr>
+
+								<tr class="Form-tbl__tr">
+									<th id="label_birth_date" class="Form-tbl__th">
+										<div class="Form-name">
+											払込方法<span class="Ico-must">必須</span>
+										</div>
+									<td class="Form-tbl__td">
+										<div class="Date-box Date-box--w01">
+											<input type="radio" name="payment_method" value="1"
+												id="payment_method_1" class="Input-radio"
+												th:checked="*{payment_method != '3'} " /> <label
+												for="payment_method_1" class="Input Input--w03 Label-radio">月払</label>
+											<input type="radio" name="payment_method" value="3"
+												id="payment_method_3" class="Input-radio"
+												th:checked="*{payment_method == '3'} " /> <label
+												for="payment_method_3" class="Input Input--w03 Label-radio">年払</label>
+										</div>
+
+									</td>
+								</tr>
+								<tr class="Form-tbl__tr">
+									<th id="label_birth_date" class="Form-tbl__th">
+										<div class="Form-name">
+											契約期間（年）<span class="Ico-must">必須</span>
+										</div>
+									<td class="Form-tbl__td">
+
+										<div class="Date-box Date-box--w01">
+											<input type="radio" name="contract_term" value="5"
+												id="contract_term_5" class="Input-radio"
+												th:checked="*{contract_term != 10} " /> <label
+												for="contract_term_5" class="Input Input--w03 Label-radio">
+												５年</label> <input type="radio" name="contract_term" value="10"
+												id="contract_term_10" class="Input-radio"
+												th:checked="*{contract_term == 10} " /> <label
+												for="contract_term_10" class="Input Input--w03 Label-radio">
+												１０年</label>
+
+										</div>
+									</td>
+								</tr>
+
+								<tr class="Form-tbl__tr">
+									<th class="Form-tbl__th">
+										<div class="Form-name">
+											入院日額（円）<span class="Ico-must">必須</span>
+										</div>
+									</th>
+									<td class="Form-tbl__td">
+										<div class="Date-box Date-box--w02">
+											<div class="Date-box--w03">
+												<div id="insurance_money" class="Select-wrap">
+													<select name="hospital_cash"
+														class="Custom-select Custom-select--year">
+														<option
+															th:each="i : ${#numbers.sequence(3000, 10000,1000)}"
+															th:value="${i}" th:text="${i}"
+															th:selected="${hospital_cash==i}"></option>
+													</select>
+												</div>
+												<span class="Date-box--w03__txt">円</span>
+											</div>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+					<div id="entry_btn" class="Control-area">
+						<button class="Control-area__btn">加入</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script src="/js/jquery-3.6.0.min"></script>
+	<script src="/js/bootstrap.min.js"></script>
 </body>
 </html>
