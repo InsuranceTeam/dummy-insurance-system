@@ -15,7 +15,7 @@ CREATE TABLE `insurance_db`.`contracts` (
   `contract_term` tinyint unsigned NOT NULL COMMENT '契約期間',
   `payment_expiration_age` tinyint unsigned NOT NULL COMMENT '払込満了年齢',
   `create_at` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '作成日',
-  `update_date` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日',
+  `update_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日',
   PRIMARY KEY (`insured_person_id`,`contract_id`,`contract_history_id`),
   CONSTRAINT `contracts_ibfk_1` FOREIGN KEY (`insured_person_id`) REFERENCES `insured_persons` (`insured_person_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='契約情報テーブル'
