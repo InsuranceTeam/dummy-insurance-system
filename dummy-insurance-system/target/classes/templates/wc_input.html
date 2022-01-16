@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/cm_common.css"/>
+  <link rel="stylesheet" href="/css/wc_common.css"/>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+  
+    <!-- jQuery -->
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <!-- jQuery UI -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+    <!-- jQuery local -->
+    <script src="/js/wc_input.js"></script>
+  <title>終身医療　入力画面</title>
+</head>
+<body>
+<!-- 終身医療の入力画面はここに作成願います -->
+  <nav class="navbar navbar-inverse">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/cm/task">ダミー保険処理システム</a>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <h1 class="text-center title">終身医療  入力画面</h1>
+  </div>
+  
+  <div class="container">
+    <div id="inputArea">
+      <form th:method="post" th:action="@{/wc/confirmation}" th:object="${wcInput}" class="Form-wrap">
+   <!--   <form class="Form-wrap">-->
+      <div class="card-body wc_input_area">
+
+          <div class=" row input_row border_top_row">
+            <div class="input_title top_row_radius">
+              <div class="control-label input_title_label" >被保険者氏名（漢字）</div>
+            </div>
+            <div class="input_form_name">
+              <label class="imput_label_name" for="nameKanjiSei">姓</label>
+              <input class="form_area " type="text" name="nameKanjiSei" 
+                      id="nameKanjiSei" placeholder="保険"
+                      th:value="*{nameKanjiSei}"/>
+           <!--   <input class="form-control" type="text" name="nameKanji" th:value="*{nameKanji}" />
+              <div class="text-danger" th:if="${#fields.hasErrors('nameKanji')}" th:errors="*{nameKanji}"></div>  -->
+              <label class="imput_label_name" for="nameKanjiMei">名</label>
+              <input class=" form_area" type="text" name="nameKanjiMei" 
+                     id="nameKanjiMei" placeholder="太郎"
+                     th:value="*{nameKanjiMei}" />
+            </div>
+          </div>
+          <div class="row input_row border_middle_row">
+            <div class="input_title">
+              <div class="control-label input_title_label">被保険者氏名（カナ）</div>
+              <div class="hissu_label border_hissu">
+                <div class="hissu_text">必須</div>
+              </div>
+            </div>
+            <div class="input_form_name">
+              <label class="imput_label_name" for="nameKanaSei">姓</label>
+              <input class=" form_area" type="text" name="nameKanaSei" 
+                     id="nameKanaSei" placeholder="ホケン"
+                     th:value="*{nameKanaSei}"/>
+          <!--    <input class="form-control" type="text" name="nameKana" th:value="*{nameKana}" />
+              <div class="text-danger" th:if="${#fields.hasErrors('nameKana')}" th:errors="*{nameKana}"></div>  -->
+              <label class="imput_label_name" for="nameKanaMei">名</label>
+              <input class="form_area " type="text" name="nameKanaMei" 
+                     id="nameKanaMei" placeholder="タロウ"
+                     th:value="*{nameKanaMei}"/>
+                <!-- <div class="text-danger" th:if="${#fields.hasErrors('nameKanaMei')}"
+                     th:errors="*{nameKanaMei}"></div>   -->
+            </div>
+          </div>
+          <div class=" row input_row border_middle_row">
+            <div class="input_title">
+              <div class="control-label input_title_label">被保険者生年月日</div>
+              <div class="hissu_label border_hissu">
+                <div class="hissu_text">必須</div>
+              </div>
+            </div>
+            <div class="input_form">
+              <input class="form_area datepicker_birth" type="text" name="birthDay" id="birthDay"
+                      placeholder="yyyy/mm/dd"
+                      th:value="*{birthDay}"/>
+           <!--   <input class="form-control" type="text" name="birthDay" th:value="*{birthDay}" />
+              <div class="text-danger" th:if="${#fields.hasErrors('birthDay')}" th:errors="*{birthDay}"></div>  -->
+            </div>
+          </div>
+          <div class="row input_row border_middle_row">
+            <div class="input_title">
+              <div class="control-label input_title_label" >被保険者性別</div>
+              <div class="hissu_label border_hissu">
+                <div class="hissu_text">必須</div>
+              </div>
+            </div>
+            <div class="input_radio" id="seibetsu">
+              <div class="radio_border">
+                <input id="mail" class="radio_area" type="radio" name="seibetsu" value="1"
+                        th:checked="*{seibetsu != '2'}"/>
+                  <label for="mail" class="label_toggle_button">男性
+                  </label>
+              </div>
+              <div class="radio_border">
+                <input id="femail" class="radio_area" type="radio" name="seibetsu" value="2"
+                        th:checked="*{seibetsu == '2'}"/>
+                  <label for="femail" class="label_toggle_button">女性
+                  </label>
+              </div>
+          <!--    <input class="form-control" type="text" name="seibetsu" th:value="*{seibetsu}" />
+              <div class="text-danger" th:if="${#fields.hasErrors('seibetsu')}" th:errors="*{seibetsu}"></div>  -->
+            </div>
+          </div>
+          <div class="row input_row border_middle_row">
+            <div class="input_title">
+              <div class="control-label input_title_label" >加入日</div>
+              <div class="hissu_label border_hissu">
+                <div class="hissu_text">必須</div>
+              </div>
+            </div>
+            <div class="input_form" >
+              <input class="form_area datepicker_start" type="text" name="kanyuBi" id="kanyuBi" placeholder="yyyy/mm/dd"
+                     th:value="*{kanyuBi}"/>
+          <!--    <input class="form-control" type="text" name="kanyuBi" th:value="*{kanyuBi}" />
+              <div class="text-danger" th:if="${#fields.hasErrors('kanyuBi')}" th:errors="*{kanyuBi}"></div>  -->
+            </div>
+          </div>
+          <div class="row input_row border_middle_row">
+            <div class="input_title">
+              <div class="control-label input_title_label" >払込方法</div>
+              <div class="hissu_label border_hissu">
+                <div class="hissu_text">必須</div>
+              </div>
+            </div>
+            <div class="input_radio" id="haraikomiHoho">
+              <div class="radio_border">
+                <input id="tsukiBarai" class="radio_area" type="radio" name="haraikomiHoho" value="1"
+                        th:checked="*{haraikomiHoho != '3'}"/>
+                  <label for="tsukiBarai" class="label_toggle_button">月払
+                  </label>
+              </div>
+              <div class="radio_border">
+                <input id="nenBarai" class="radio_area" type="radio" name="haraikomiHoho" value="3"
+                        th:checked="*{haraikomiHoho == '3'}"/>
+                  <label for="nenBarai" class="label_toggle_button">年払
+                  </label>
+              </div>
+            </div>
+      <!--        <div class="input_form" >
+              <select class="form_area select_list" name="haraikomiHoho">
+                <option label="月払"  value="1" th:selected="*{haraikomiHoho=='1'}">月払</option>
+                <option label="年払"  value="3" th:selected="*{haraikomiHoho=='3'}">年払</option>
+              </select>
+              </div>
+              <!-- <input class="form_area" type="text" name="haraikomiHoho" id="haraikomiHoho"/> -->
+          <!--    <input class="form-control" type="text" name="haraikomiHoho" th:value="*{haraikomiHoho}" />
+              <div class="text-danger" th:if="${#fields.hasErrors('haraikomiHoho')}" th:errors="*{haraikomiHoho}"></div>  -->
+            
+          </div>
+          <div class="row input_row border_middle_row">
+            <div class="input_title">
+              <div class="control-label input_title_label">払込満了年齢</div>
+              <div class="hissu_label border_hissu">
+                <div class="hissu_text">必須</div>
+              </div>
+            </div>
+            <div class="input_radio" id="haraikomiManryoNenrei">
+              <div class="radio_border">
+                <input id="sixtyYearsOld" class="radio_area" type="radio" name="haraikomiManryoNenrei" value="60"
+                        th:checked="*{haraikomiManryoNenrei != 99}"/>
+                  <label for="sixtyYearsOld" class="label_toggle_button">60歳
+                  </label>
+              </div>
+              <div class="radio_border">
+                <input id="wholeLife" class="radio_area" type="radio" name="haraikomiManryoNenrei" value="99"
+                        th:checked="*{haraikomiManryoNenrei == 99}"/>
+                  <label for="wholeLife" class="label_toggle_button">終身
+                  </label>
+              </div>
+            </div>
+        <!--  
+            <div class="input_form">
+              <select class="form_area select_list" name="haraikomiManryoNenrei" >
+                <option label="60歳"  value="60" th:selected="*{haraikomiManryoNenrei==60}">60歳</option>
+                <option label="終身"  value="99" th:selected="*{haraikomiManryoNenrei==99}">終身</option>
+              </select>
+            </div>
+        -->
+          </div>
+          <div class="row input_row border_bottom_row">
+            <div class="input_title bottom_row_radius">
+              <div class="control-label input_title_label" >入院日額</div>
+              <div class="hissu_label border_hissu">
+                <div class="hissu_text">必須</div>
+              </div>
+            </div>
+            <div class="input_form">
+              <select class="form_area select_list" name="nyuinNichigaku" >
+                <option th:each="i : ${#numbers.sequence(3000, 10000,1000)}" th:value="${i}" th:text="${i}"
+                         th:selected="${wcInput.nyuinNichigaku==i}"></option>
+              </select>
+              <span class="price_unit">円</span>
+            </div>
+          </div>
+        </div> <!-- wc_input_area 終わり  -->
+        
+        <!-- <div id="before_confirm_check" class="confirm">
+          <button id="beforeConfirm" class="confirm_btn">確認画面へ</button>
+        </div> -->
+        
+        <div id="minyuryokuArea" class="errorInfo">
+          <span class="text-danger">必須項目が未入力です</span>
+        </div>
+        
+        <div id="errorMsgArea" class="errorInfo" style="display:none">
+          <div id="errorMsg" class="text-danger"></div>
+        </div>
+
+        <div id="confirmation_btn" class="confirm" style="display:none">
+          <button id="confirmBtn" class="confirm_btn">確認画面へ</button>
+        </div>
+        <br>
+       <!--  <div class="confirm">
+          <a href="wc_confirmation">
+            <button class="confirm_btn">style="display:none"
+              確認画面へ
+            </button>
+          </a>
+        </div>
+        -->
+
+      </form>
+      <div id="komokuCheck" class="komoku_check" style="display:none">
+          <button id="komokuCheckBtn" class="check_btn">入力内容チェック</button>
+        </div>
+      </div>
+      
+    </div>
+    
+
+     <!-- <script src="/js/jquery-3.6.0.min"></script>  -->
+  <script src="/js/bootstrap.min.js"></script>
+</body>
+</html>

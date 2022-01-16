@@ -1,0 +1,334 @@
+@charset "utf-8";
+
+/* 終身医療 */
+
+/* データ
+--------------------------------------------------*/
+
+#inputArea{
+	text-align:center;
+}
+
+.wc_input_area{
+	display:inline-block;
+	width:800px;
+	text-align:center;
+	position:relative;
+	
+}
+
+.input_row{
+	text-align:center;
+	position:relative;
+	/*height:60px; */
+	/*margin-top:5px;*/
+	/*margin-bottom:5px;*/
+	/* margin-top:2px; */
+	/* padding-top:10px; */
+	/* padding-bottom:10px; */
+}
+
+.input_form{
+	width:50%;
+	position:relative;
+	margin-top:auto;
+	margin-bottom:auto;
+	text-align:left;
+	margin-left:10px;
+	padding-top:10px;
+    padding-bottom:10px;
+}
+
+.input_form_name{
+    position:relative;
+    margin-top:auto;
+    margin-bottom:auto;
+    display:flex;
+    width:60%;
+    padding-top:10px;
+    padding-bottom:10px;    
+}
+
+.input_radio{
+    margin-top:auto;
+    margin-bottom:auto;
+    width:60%;
+    text-align:left;
+    padding-left:20px;
+    display:flex;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+.imput_label_name{
+	text-align:center;
+	padding-left:10px;
+	padding-right:10px;
+	margin-top:auto;
+	margin-bottom:auto;
+}
+
+.input_title{
+	background: #ebeae7;
+	width:40%;
+	display:flex;
+	border-right:1px solid #80b735;
+
+}
+
+.input_title_label{
+	margin-top:auto;
+    margin-bottom:auto;
+    margin-left:10px;
+    margin-right:auto;
+}
+
+.hissu_label{
+	margin-right:10px;
+	margin-top:auto;
+	margin-bottom:auto;
+}
+
+.border_hissu{
+	color:#ff0000;
+	border:1px solid #ff0000;
+	border-radius:6px;
+}
+
+.hissu_text{
+	margin:2px 4px;
+}
+
+.form-control{
+	height:50px;
+}
+
+.border_green{
+	border:1px solid #80b735;
+}
+
+.border_top_row{
+	border-top:2px  solid #80b735;
+	border-left:2px solid #80b735;
+	border-right:2px solid #80b735;
+	border-bottom:1px solid #808080;
+	border-radius: 6px 6px 0 0;
+}
+
+.border_middle_row{
+	border-bottom:1px solid #808080;
+	border-left:2px solid #80b735;
+    border-right:2px solid #80b735;
+}
+
+.border_bottom_row{
+	border-bottom:2px solid #80b735;
+	border-left:2px solid #80b735;
+    border-right:2px solid #80b735;
+    border-radius: 0 0 6px 6px;
+}
+
+.top_row_radius{
+	border-radius:6px 0 0 0 ;
+}
+
+.bottom_row_radius{
+	border-radius:0 0 0 6px;
+}
+
+.form_area{
+	height:35px;
+	border:1px solid #0d6c10;
+	border-radius:3px;
+}
+
+.radio_border{
+	border:1px solid #0d6c10;
+	border-radius:3px;
+	margin-right:20px;
+	padding:5px;
+	width:50%;
+}
+
+.label_toggle_button{
+	vertical-align:middle;
+}
+
+.select_list{
+	width:30%;
+}
+
+.price_unit{
+	margin-left:5px;
+}
+
+.background_error{
+	background:#ffb9b9;
+}
+
+.wc_kakekin_area{
+	width:500px;
+	display:inline-block;
+}
+
+.display_premium_area{
+	text-align:center;
+	display:flex;
+}
+
+.input_premium{
+	width:50%;
+	vertical-align:middle;
+}
+
+.premium_area_border{
+	border-radius: 6px 6px 6px 6px;
+	border:2px solid #0080ff;
+}
+
+input[type=radio]{
+	width:30px;
+	height:30px;
+	vertical-align:middle;
+}
+
+input[name=seibetsu]{
+	margin-left:10px;
+}
+
+.title{
+    width: 1000px;
+    height: 70px;
+    text-align:center;
+    margin: 0 auto;
+    color: #808080;
+    margin-top: 10px;
+    font-size:40px;
+}
+
+.confirm_btn{
+	text-align:center;
+	background:#80b735;
+	border-radius:10px;
+	color:#fff;
+	font-size:25px;
+	padding: 5px 40px;
+	position:relative;
+}
+
+.entry_btn{
+    text-align:center;
+    background:#80b735;
+    border-radius:10px;
+    color:#fff;
+    font-size:25px;
+    padding: 5px 40px;
+    position:relative;
+}
+
+.check_btn{
+	text-align:center;
+	background:#ff8000;
+	border-radius:10px;
+	color:#fff;
+	padding:5px 40px;
+	position:relative;
+	
+}
+
+.btn_large{
+	font-size:large;
+}
+
+
+
+
+
+
+
+.caption-com{
+  caption-side: top;
+  border-bottom: 1px solid #80b735;
+  background: #fafafa;
+  padding-left:10px;
+  text-align: center;
+}
+
+.Header__inner{
+  display: flex;
+  width: 100%;
+  margin: 0px 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.table_left{
+	width:400px;
+}
+
+.table_right{
+	width:400px;
+}
+
+#tableLeftArea{
+	width:450px;
+	display:inline-block;
+}
+
+#tableRightArea{
+	width:450px;
+	float:right;
+	margin-right:100px;
+}
+
+.table_form{
+    position:relative;
+    margin-top:auto;
+    margin-bottom:auto;
+    text-align:left;
+    margin-left:10px;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+.table_tr{
+    border-bottom:0.5px solid #80b735;
+    border-left:0.5px solid #80b735;
+    border-right:0.5px solid #80b735;
+}
+
+
+
+
+
+.subtitle{
+  width: 1000px;
+  height: 100px;
+  text-align:center;
+  margin: 0 auto;
+  color: #808080;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  font-size:50px;
+}
+.task_link{
+  width: 1000px;
+  height: 100px;
+  text-align:center;
+  margin: 0 auto;
+}
+
+.btn-flat-border {
+  display: inline-block;
+  padding: 1.3em 4em;
+  text-decoration: none;
+  color: blue;
+  border: solid 2px blue;
+  border-radius: 3px;
+  transition: .4s;
+}
+
+.btn-flat-border:hover {
+  background: blue;
+  color: white;
+}

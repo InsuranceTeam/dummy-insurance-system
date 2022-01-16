@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/wc_common.css" />
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+
+  <!-- jQuery -->
+  <script src="/js/jquery-3.6.0.min.js"></script>
+  <!-- jQuery UI -->
+  <script
+    src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script
+    src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+
+  <title>終身医療（加入） 完了画面</title>
+</head>
+
+<body>
+  <header class="Header">
+    <div class="Header__inner">
+      <a href="/cm/security">ダミー保険事務処理システム</a> <a href="/cm/security">保障種類選択画面へ戻る</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="title">終身医療に加入しました</div>
+  </div>
+
+  <form th:method="post" th:action="@{/wc/completion}" th:object="${wcCompletion}" class="Form-wrap">
+    <div class="container">
+      <div id="inputArea">
+        <div id="tableLeftArea">
+          <table class="table_left">
+            <caption class="caption-com" th:text="|被保険者情報　${iuComment}"></caption>
+            <tbody>
+              <tr class="table_tr">
+                <th class="table_th">
+                  <div class="table_form">
+                    <div th:text="被保険者番号"></div>
+                  </div>
+                </th>
+                <td class="table_form">
+                  <div th:text="*{wcInsuredPersons.insured_person_id}"></div>
+                </td>
+              </tr>
+              <tr class="table_tr">
+                <th class="table_th">
+                  <div class="table_form">
+                    被保険者氏名_漢字
+                  </div>
+                </th>
+                <td class="table_form">
+                  <div th:text="*{wcInsuredPersons.insured_person_name_kanji}"></div>
+                </td>
+              </tr>
+              <tr class="table_tr">
+                <th class="table_th">
+                  <div class="table_form">
+                    <div th:text="被保険者氏名_カナ"></div>
+                  </div>
+                </th>
+                <td class="table_form">
+                  <div th:text="*{wcInsuredPersons.insured_person_name_kana}"></div>
+                </td>
+              </tr>
+              <tr class="table_tr">
+                <th class="table_th">
+                  <div class="table_form">
+                    <div th:text="生年月日"></div>
+                  </div>
+                </th>
+                <td class="table_form">
+                  <div th:text="*{wcInsuredPersons.insured_person_birth_date}"></div>
+                </td>
+              </tr>
+              <tr class="table_tr bottom_row_radius">
+                <th class="table_th">
+                  <div class="table_form">
+                    <div th:text="性別"></div>
+                  </div>
+                </th>
+                <td class="table_form">
+                  <div th:if="*{wcInsuredPersons.insured_person_sex=='1'}"><div th:text="男性"></div></div>
+                      <div th:if="*{wcInsuredPersons.insured_person_sex=='2'}"><div th:text="女性"></div></div>
+                </td>
+              </tr>
+              
+            </tbody>
+          </table>
+        </div>
+        
+        <div id="tableRightArea">
+          <table class="table_right">
+            <caption class="caption-com" >契約情報</caption>
+            <tbody>
+              <tr class="table_tr">
+                <th class="table_th">
+                  <div class="table_form">
+                    契約番号
+                  </div>
+                </th>
+                <td class="table_form">
+                  <div th:text="*{wcContracts.contract_id}"></div>
+                </td>
+              </tr>
+              <tr class="table_tr">
+                <th class="table_th">
+                  <div class="table_form">
+                    契約履歴番号
+                  </div>
+                </th>
+                <td class="table_form">
+                  <div th:text="*{wcContracts.contract_history_id}"></div>
+                </td>
+              </tr>
+              <tr class="table_tr">
+                <th class="table_th">
+                  <div class="table_form">
+                    契約開始日
+                  </div>
+                </th>
+                <td class="table_form">
+                  <div th:text="*{wcContracts.contract_start_date}"></div>
+                </td>
+              </tr>
+              <tr class="table_tr">
+                <th class="table_th">
+                  <div class="table_form">
+                    加入年齢
+                  </div>
+                </th>
+                <td class="table_form">
+                  <div th:text="|*{wcContracts.entry_age}　歳|"></div>
+                </td>
+              </tr>
+              <tr class="table_tr">
+                <th class="table_th">
+                  <div class="table_form">
+                    払込方法
+                  </div>
+                </th>
+                <td class="table_form">
+                  <div th:text="*{wcContracts.contract_start_date}"></div>
+                </td>
+              </tr>
+              <tr class="table_tr">
+                <th class="table_th">
+                  <div class="table_form">
+                    契約開始日
+                  </div>
+                </th>
+                <td class="table_form">
+                  <div th:text="*{wcContracts.contract_start_date}"></div>
+                </td>
+              </tr>
+              <tr class="table_tr">
+                <th class="table_th">
+                  <div class="table_form">
+                    払込方法
+                  </div>
+                </th>
+                <td class="table_form">
+                  <div th:if="*{wcContracts.payment_method=='1'}">
+                    <div th:text="月払"></div>
+                  </div>
+                  <div th:if="*{wcContracts.payment_method=='3'}">
+                    <div th:text="年払"></div>
+                  </div>
+                </td>
+              </tr>
+              <tr class="table_tr">
+                <th class="table_th">
+                  <div class="table_form">
+                    払込満了年齢
+                  </div>
+                </th>
+                <td class="table_form">
+                  <div th:if="*{wcContracts.payment_expiration_age!=99}">
+                    <div th:text="|*{wcContracts.payment_expiration_age}　歳|"></div>
+                  </div>
+                  <div th:if="*{wcContracts.payment_expiration_age==99}">
+                    <div th:text="終身"></div>
+                  </div>
+                </td>
+              </tr>
+              <tr class="table_tr">
+                <th class="table_th">
+                  <div class="table_form">
+                    入院日額
+                  </div>
+                </th>
+                <td class="table_form">
+                  <div th:text="|*{wcContracts.insurance_money}　円|"></div>
+                </td>
+              </tr>
+              <tr class="table_tr">
+                <th class="table_th">
+                  <div class="table_form">
+                    掛金
+                  </div>
+                </th>
+                <td class="table_form">
+                  <div th:text="|*{wcContracts.premium}　円|"></div>
+                </td>
+              </tr>
+              <tr class="table_tr bottom_row_radius">
+                <th class="table_th">
+                  <div class="table_form">
+                    掛金払込期間
+                  </div>
+                </th>
+                <td class="table_form">
+                  <div th:if="*{wcContracts.premium_payment_term!=99}">
+                    <div th:text="|*{wcContracts.premium_payment_term}　年|"></div>
+                  </div>
+                  <div th:if="*{wcContracts.premium_payment_term==99}">
+                    <div th:text="終身"></div>
+                  </div>
+                </td>
+              </tr>
+          
+            </tbody>
+          </table>
+        </div>
+      
+      </div>
+    </div>
+  </form>
+  
+</body>
+</html>
