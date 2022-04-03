@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/tc_common.css" />
+
+    <title>定期医療　被保険者検索画面</title>
+  </head>
+
+  <body>
+    <header class="Header">
+      <div class="Header__inner">
+        <a href="/cm/task">ダミー保険事務処理システム</a>
+        <form th:method="get" th:action="@{/cm/s/security}" >
+          <button class="btn btn-link btn-link-return">戻る</button>
+        </form>
+      </div>
+    </header>
+    <div class="container">
+        <div class="title">定期医療　被保険者検索画面</div>
+    </div>
+
+
+    <div class="l-base">
+      <form th:method="post" th:action="@{/tc/s/list}" th:object="${tcSSearch}" class="Form-search">
+
+        <div class="Box-flame">
+          <table class="Form-tbl">
+            <tr class="Form-tbl__tr">
+              <th class="Form-tbl_search_th"><div class="Form-name">被保険者番号</div></th>
+              <td class="Form-tbl__td">
+                <div class="Date-box">
+                  <input type="text" class="Input Input--w01" th:field="*{insured_person_id_str}">
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+              <div class="text-danger" th:if="${#fields.hasErrors('insured_person_id_str')}"
+                th:errors="*{insured_person_id_str}"></div>
+
+
+        <div id="confirmation_btn" class="Control-area">
+          <button class="Control-area__btn">検索</button>
+        </div>
+      </form>
+    </div>
+
+  </body>
+</html>

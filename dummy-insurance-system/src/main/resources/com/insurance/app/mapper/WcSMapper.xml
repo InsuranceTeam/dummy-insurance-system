@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.insurance.app.mapper.WcSMapper">
+
+  <!-- 一覧へ表示する終身生命契約を取得する -->
+  <select id="selectWcSList" resultType="com.insurance.app.domain.WcSList">
+        select  P.insured_person_id,
+                P.insured_person_name_kanji,
+                P.insured_person_name_kana,
+                P.insured_person_birth_date,
+                P.insured_person_sex,
+                C.contract_id,
+                C.contract_start_date,
+                C.contract_end_date
+          from  insured_persons as P
+    inner join  contracts as C
+            on  P.insured_person_id = C.insured_person_id
+         where  P.insured_person_id = #{insured_person_id}
+           and  C.security_type = 'WC'
+  </select>
+
+  <!-- 契約照会へ表示する終身生命契約を取得する -->
+  <select id="selectWcSReference" resultType="com.insurance.app.domain.WcSReference">
+        select  P.insured_person_id,
+                P.insured_person_name_kanji,
+                P.insured_person_name_kana,
+                P.insured_person_birth_date,
+                P.insured_person_sex,
+                P.update_at as ip_update_at,
+                C.contract_id,
+                C.contract_history_id,
+                C.contract_start_date,
+                C.contract_end_date,
+                C.contract_end_reason,
+                C.contract_maturity_date,
+                C.security_type,
+                C.entry_age,
+                C.payment_method,
+                C.insurance_money,
+                C.premium,
+                C.premium_payment_term,
+                C.contract_term,
+                C.payment_expiration_age,
+                C.update_at as c_update_at,
+                PAY.payment_control_id,
+                PAY.payment_amount,
+                PAY.update_at as p_update_at
+          from  insured_persons as P
+    inner join  contracts as C
+            on  P.insured_person_id = C.insured_person_id
+           and  P.insured_person_id = #{insured_person_id}
+           and  C.contract_id       = #{contract_id}
+     left join  payment_idx as PI
+            on  P.insured_person_id = PI.insured_person_id
+           and  C.contract_id       = PI.contract_id
+     left join  payment as PAY
+            on  PI.payment_control_id = PAY.payment_control_id
+
+  </select>
+
+</mapper>

@@ -86,6 +86,13 @@ h1, h2, h3, h4, h5, h6,dl,dt,dd{
   margin-bottom: 20px;
   font-size:50px;
 }
+
+.task_login{
+  color: #808080;
+  font-size: 27px;
+  margin: auto;
+}
+
 .task_name{
 	color: #808080;
 	font-size: 27px;
@@ -111,4 +118,9 @@ h1, h2, h3, h4, h5, h6,dl,dt,dd{
 .btn-flat-border:hover {
   background: blue;
   color: white;
+}
+
+.btn-login{
+  font-size: 30px;
+  margin-top: 5%;
 }

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.log">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/css/cm_common.css" />
+<link rel="stylesheet" href="/css/tl_input.css" />
+<title>定期生命 照会画面</title>
+</head>
+<body>
+	<header class="Header">
+		<div class="Header__inner">
+			<a href="/cm/s/security">ダミー保険事務処理システム</a>
+			<!--  <a href="/cm/list">戻る</a> -->
+			<div class="container">
+				<div class="dropdown">
+					<div class="caption">メニュー</div>
+					<div class="list">
+						<div class="item">
+							<button id="refundMenu" class="dropdownButton">解約／取消</button>
+						</div>
+						<div class="item">
+							<form th:method="post" th:action="@{/tl/s/list}"
+								th:object="${tlSContracts}">
+								<input type="hidden" th:field="*{insured_person_id}">
+								<button class="dropdownButton">一覧へ戻る</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<div class="modal-overlay">
+
+		<div class="modal" id=modal1>
+
+			<a class="close-modal"> <svg viewBox="0 0 20 20">
+        <path fill="#000000"
+						d="M15.898,4.045c-0.271-0.272-0.713-0.272-0.986,0l-4.71,4.711L5.493,4.045c-0.272-0.272-0.714-0.272-0.986,0s-0.272,0.714,0,0.986l4.709,4.711l-4.71,4.711c-0.272,0.271-0.272,0.713,0,0.986c0.136,0.136,0.314,0.203,0.492,0.203c0.179,0,0.357-0.067,0.493-0.203l4.711-4.711l4.71,4.711c0.137,0.136,0.314,0.203,0.494,0.203c0.178,0,0.355-0.067,0.492-0.203c0.273-0.273,0.273-0.715,0-0.986l-4.711-4.711l4.711-4.711C16.172,4.759,16.172,4.317,15.898,4.045z"></path>
+      </svg>
+			</a>
+			<!-- close modal -->
+
+			<div class="modal-content">
+				<div>
+					<div class="modalcenter">
+						<h1 class="modalTitle">解約／取消 入力画面</h1>
+					</div>
+					<div class="modalcenter">
+						<div class="select">
+							<span class="placeholder"> 解約 </span>
+							<ul>
+								<li data-value="K0">解約</li>
+								<li data-value="K2">取消</li>
+							</ul>
+							<input type="hidden" name="changeme" id=reason />
+						</div>
+					</div>
+
+					<div class="modalcolumn">
+						<div class="line" id=refundDateInput>
+							<input type="tel" maxlength='4' class="four" spellcheck="false"
+								id=year> <label class="subname">年</label> <input
+								type="tel" maxlength='2' class="two" spellcheck="false" id=month>
+							<label class="subname">月</label> <input type="tel" maxlength='2'
+								class="two" spellcheck="false" id=day> <label
+								class="subname">日</label>
+						</div>
+						<label class="message" id="errorMsg"></label>
+					</div>
+					<div class="modalcenter">
+						<Button class="confirmButton" id="refundButton">確認</Button>
+					</div>
+				</div>
+			</div>
+			<!-- content -->
+
+		</div>
+		<div class="modal" id=modal2>
+
+			<a class="close-modal"> <svg viewBox="0 0 20 20">
+        <path fill="#000000"
+						d="M15.898,4.045c-0.271-0.272-0.713-0.272-0.986,0l-4.71,4.711L5.493,4.045c-0.272-0.272-0.714-0.272-0.986,0s-0.272,0.714,0,0.986l4.709,4.711l-4.71,4.711c-0.272,0.271-0.272,0.713,0,0.986c0.136,0.136,0.314,0.203,0.492,0.203c0.179,0,0.357-0.067,0.493-0.203l4.711-4.711l4.71,4.711c0.137,0.136,0.314,0.203,0.494,0.203c0.178,0,0.355-0.067,0.492-0.203c0.273-0.273,0.273-0.715,0-0.986l-4.711-4.711l4.711-4.711C16.172,4.759,16.172,4.317,15.898,4.045z"></path>
+      </svg>
+			</a>
+			<!-- close modal -->
+			<Form th:method="POST" th:action="@{/tl/s/refund_execute}"
+				th:object="${tlSContracts}">
+				<div class="modal-content">
+					<div>
+						<div class="modalcenter">
+							<h1 id=modalTitle class="modalTitle"></h1>
+						</div>
+						<div class="column" border>
+							<label class="columnName" border>被保険者番号</label> <Label
+								class="columnName" padding th:text="*{insured_person_id}"></Label>
+						</div>
+						<div class="column" border>
+							<label class="columnName" border>契約番号</label> <Label
+								class="columnName" padding th:text="*{contract_id}"></Label>
+						</div>
+						<div class="column" border id=refund_date_column>
+							<label class="columnName" border>解約日</label> <Label
+								class="columnName" padding id=refund_date_disp></Label>
+						</div>
+						<div class="column" border id=refund_money_column>
+							<label class="columnName" border>解約返戻金</label> <Label
+								class="columnName" padding id=refund_money_disp></Label>
+						</div>
+						<input type="hidden" th:value="*{insured_person_id}"
+							name="insured_person_id"> <input type="hidden"
+							th:value="*{contract_id}" name="contract_id"> <input
+							type="hidden" th:value="*{contract_history_id}"
+							name="contract_history_id"><input type="hidden"
+							id=contract_end_date name="contract_end_date"> <input
+							type="hidden" id=contract_end_reason name="contract_end_reason">
+						<input type="hidden" th:value="*{contract_start_date}"
+							name="contract_start_date"> <input type="hidden"
+							id=refund_money name="refund_money">
+						<div class="modalcenter">
+							<Button class="confirmButton">完了</Button>
+						</div>
+					</div>
+				</div>
+				<!-- content -->
+			</Form>
+		</div>
+		<!-- modal -->
+	</div>
+	<!-- overlay -->
+
+	<Form th:method="POST" th:action="@{/tl/completion}"
+		th:object="${tlSContracts}">
+		<div class="screen">
+			<Label class="titleComplete">定期生命 照会</Label>
+			<div class="main">
+				<div class="form-group">
+					<div class="column" border>
+						<label class="columnName" border>被保険者番号</label> <Label
+							class="columnName" padding th:text="*{insured_person_id}"
+							id=insured_person_id></Label>
+					</div>
+					<div class="column" border>
+						<label class="columnName" border>被保険者氏名(漢字)</label> <Label
+							class="columnName" padding th:text="*{insured_person_name_kanji}"></Label>
+					</div>
+					<div class="column" border>
+						<label class="columnName" border>被保険者氏名(カナ)</label> <Label
+							class="columnName" padding th:text="*{insured_person_name_kana}"></Label>
+					</div>
+					<div class="column" border>
+						<label class="columnName" border>生年月日</label><Label
+							class="columnName" padding
+							th:text="*{#strings.substring(insured_person_birth_date,0,4)} + '年'
+                                    + *{#strings.substring(insured_person_birth_date,4,6)} + '月'
+                                    + *{#strings.substring(insured_person_birth_date,6,8)} + '日'"></Label>
+						<input type="hidden" th:value="*{insured_person_birth_date}"
+							id=insured_person_birth_date>
+					</div>
+					<div class="column" border>
+						<label class="columnName" border>性別</label> <Label
+							class="columnName" padding
+							th:text="*{insured_person_sex}=='1' ? '男性':'女性'"></Label> <input
+							type="hidden" th:value="*{insured_person_sex}"
+							id=insured_person_sex>
+					</div>
+					<div class="column" border>
+						<label class="columnName" border>加入年齢</label><Label
+							class="columnName" padding th:text="|*{entry_age}歳|"></Label> <input
+							type="hidden" th:value="*{entry_age}" id=entry_age>
+
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="column" border>
+						<label class="columnName" border>契約番号</label> <Label
+							class="columnName" padding th:text="*{contract_id}"
+							id=contract_id></Label>
+					</div>
+					<div class="column" border>
+						<label class="columnName" border>契約履歴番号</label><Label
+							class="columnName" padding th:text="*{contract_history_id}"
+							id="contract_history_id"></Label>
+					</div>
+					<div class="column" border>
+						<label class="columnName" border>契約開始日</label><Label
+							class="columnName" padding
+							th:text="*{#strings.substring(contract_start_date,0,4)} + '年'
+                                    + *{#strings.substring(contract_start_date,4,6)} + '月'
+                                    + *{#strings.substring(contract_start_date,6,8)} + '日'"></Label>
+						<input type="hidden" th:value="*{contract_start_date}"
+							id=contract_start_date>
+					</div>
+					<div class="column" border>
+						<label class="columnName" border>契約満期日</label><Label
+							class="columnName" padding
+							th:text="*{#strings.substring(contract_maturity_date,0,4)} + '年'
+                                      + *{#strings.substring(contract_maturity_date,4,6)}  + '月'
+                                      + *{#strings.substring(contract_maturity_date,6,8)}+ '日'"></Label>
+						<input type="hidden" th:value="*{contract_maturity_date}"
+							id=contract_maturity_date>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="column" border>
+						<label class="columnName" border>払込方法</label><Label
+							class="columnName" padding
+							th:text="*{payment_method}=='1' ? '月払':'年払'"></Label> <input
+							type="hidden" th:value="*{payment_method}" id=payment_method>
+					</div>
+					<div class="column" border>
+						<label class="columnName" border>払込期間</label><Label
+							class="columnName" padding th:text="|*{premium_payment_term}年|"></Label>
+						<input type="hidden" th:field="*{premium_payment_term}">
+					</div>
+					<div class="column" border>
+						<label class="columnName" border>死亡保険金</label><Label
+							class="columnName" padding
+							th:text="*{insurance_money} / 10000 + 万円"></Label> <input
+							type="hidden" th:value="*{insurance_money}" id=insurance_money>
+					</div>
+					<div class="column" border>
+						<label class="columnName" border>掛金</label><Label
+							class="columnName" padding th:text="|*{premium}円|"></Label> <input
+							type="hidden" th:value="*{premium}" id=premium>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="column" border>
+						<label class="columnName" border>契約終了日</label><Label
+							class="columnName" padding
+							th:text="*{contract_end_date}=='00000000' ? '':*{#strings.substring(contract_end_date,0,4)} + '年'
+                                      + *{#strings.substring(contract_end_date,4,6)}  + '月'
+                                      + *{#strings.substring(contract_end_date,6,8)}+ '日'"></Label>
+						<input type="hidden" th:value="*{contract_end_date}"
+							id=contract_end_date>
+					</div>
+					<div class="column" border>
+						<label class="columnName" border>契約終了事由</label><Label
+							class="columnName" padding th:text="*{contract_end_reason}"
+							id=contract_end_reason_disp> </Label>
+					</div>
+					<div class="column" border th:if="*{payment_control_id!=0}">
+						<label class="columnName" border>支払管理番号</label><Label
+							class="columnName" padding th:text="*{payment_control_id}"></Label>
+					</div>
+					<div class="column" border th:if="*{payment_amount!=0}">
+						<label class="columnName" border>支払額</label><Label
+							class="columnName" padding th:text="|*{payment_amount}円|"></Label>
+					</div>
+					<input type="hidden" th:field="${insured_person_id}"
+						name="insured_person_id"> <input type="hidden"
+						th:field="${contract_id}" name="contract_id">
+
+				</div>
+			</div>
+		</div>
+	</Form>
+	<script src="/js/jquery-3.6.0.min.js"></script>
+	<script src="/js/tl_input.js"></script>
+</body>
+</html>

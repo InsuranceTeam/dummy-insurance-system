@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.log">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/css/cm_common.css" />
+<link rel="stylesheet" href="/css/tl_input.css" />
+
+<title>定期生命 一覧画面</title>
+</head>
+<body>
+
+	<header class="Header">
+		<div class="Header__inner">
+			<a href="/cm/task">ダミー保険事務処理システム</a>
+		</div>
+	</header>
+	<div class="dummyForm">
+		<div class="screen">
+			<Label class="title">定期生命 一覧</Label>
+			<div class="main">
+				<table>
+					<thead>
+						<tr>
+							<th>被保険者番号</th>
+							<th>被保険者氏名（漢字）</th>
+							<th>被保険者氏名（カナ）</th>
+							<th>被保険者生年月日</th>
+							<th>被保険者性別</th>
+							<th>契約番号</th>
+							<th>契約開始日</th>
+							<th>契約終了日</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="tlSList:${tlSList}" th:object="${tlSList}">
+							<td th:text="*{insured_person_id}"></td>
+							<td th:text="*{insured_person_name_kanji}"></td>
+							<td th:text="*{insured_person_name_kana}"></td>
+							<td th:text="*{#strings.substring(insured_person_birth_date,0,4)} + '/'
+                                    + *{#strings.substring(insured_person_birth_date,4,6)} + '/'
+                                    + *{#strings.substring(insured_person_birth_date,6,8)}"></td>
+							<td th:text="*{insured_person_sex}=='1' ? '男性':'女性'"></td>
+							<td th:text="*{contract_id}"></td>
+							<td th:text="*{#strings.substring(contract_start_date,0,4)} + '/'
+                                    + *{#strings.substring(contract_start_date,4,6)} + '/'
+                                    + *{#strings.substring(contract_start_date,6,8)}"></td>
+							<td th:text="*{contract_end_date}=='00000000' ? '':*{#strings.substring(contract_end_date,0,4)} + '/'
+                                    + *{#strings.substring(contract_end_date,4,6)} + '/'
+                                    + *{#strings.substring(contract_end_date,6,8)}"></td>
+							<td>
+								<Form th:method="POST" th:action="@{/tl/s/contract}" >
+									<input type="hidden" th:value="*{insured_person_id}"
+										name="insured_person_id"> <input type="hidden"
+										th:value="*{contract_id}" name="contract_id">
+								</Form>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<script src="/js/jquery-3.6.0.min.js"></script>
+	<script src="/js/tl_input.js"></script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.insurance.app.mapper.TlSMapper">
+
+  <!-- 一覧へ表示する定期生命契約を取得する -->
+  <select id="searchTlSList" resultType="com.insurance.app.domain.TlSList">
+    select      ip.insured_person_id,
+                ip.insured_person_name_kanji,
+                ip.insured_person_name_kana,
+                ip.insured_person_birth_date,
+                ip.insured_person_sex,
+                c.contract_id,
+                c.contract_start_date,
+                c.contract_end_date
+    from        insured_persons as ip
+    inner join  contracts as c
+    on          ip.insured_person_id = c.insured_person_id
+    and         ip.insured_person_id = #{insured_person_id}
+    and         c.security_type = 'TL'
+  </select>
+
+  <!-- 契約照会へ表示する定期生命契約を取得する -->
+  <select id="getTlSContract" resultType="com.insurance.app.domain.TlSContracts">
+    select      ip.insured_person_id,
+                ip.insured_person_name_kanji,
+                ip.insured_person_name_kana,
+                ip.insured_person_birth_date,
+                ip.insured_person_sex,
+                c.contract_id,
+                c.contract_history_id,
+                c.contract_start_date,
+                c.contract_end_date,
+                c.contract_end_reason,
+                c.contract_maturity_date,
+                c.security_type,
+                c.entry_age,
+                c.payment_method,
+                c.insurance_money,
+                c.premium,
+                c.premium_payment_term,
+                c.contract_term,
+                c.payment_expiration_age,
+                c.create_at as create_at,
+                c.update_at as update_at,
+                p.payment_control_id,
+                p.payment_amount
+    from        insured_persons as ip
+    inner join  contracts as c
+    on          ip.insured_person_id = c.insured_person_id
+    and         ip.insured_person_id = #{insured_person_id}
+    and         c.contract_id        = #{contract_id}
+    left join   payment_idx as pi
+    on          ip.insured_person_id = pi.insured_person_id
+    and         c.contract_id        = pi.contract_id
+    left join   payment as p
+    on          pi.payment_control_id = p.payment_control_id
+
+  </select>
+  
+    <!--被保険者情報テーブルを更新する -->
+  <update id="updateRefundContract">
+    update contracts
+       set contract_end_date   = #{contract_end_date},
+           contract_end_reason = #{contract_end_reason}
+     where insured_person_id   = #{insured_person_id}
+       and contract_id         = #{contract_id}
+       and contract_history_id = #{contract_history_id}
+  </update>
+  
+
+  
+    <insert id="insertPaymentIdx" >
+    insert into payment_idx(insured_person_id,
+                              contract_id,
+                         payment_control_id)
+    values              (#{insured_person_id},
+                         #{contract_id},
+                         #{payment_control_id})
+  </insert>
+  
+      <!--契約情報テーブルを登録する -->
+  <insert id="insertPayment" useGeneratedKeys="true" keyProperty="payment_control_id">
+    insert into payment(payment_amount)
+    values              (#{payment_amount})
+  </insert>
+ 
+
+</mapper>

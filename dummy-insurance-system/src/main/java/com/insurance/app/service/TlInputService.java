@@ -4,9 +4,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.regex.Pattern;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.util.StringUtils;
+
 import com.insurance.app.domain.TlInput;
 
 
@@ -39,6 +42,7 @@ public class TlInputService {
       tlInput.setInsured_person_name_kana_error("氏名カナを入力してください。");
       result = false;
     }
+
 
     /* 生年月日チェック */
     if (StringUtils.isEmpty(tlInput.getInsured_person_birth_year())
@@ -106,4 +110,15 @@ public class TlInputService {
     return result;
 
   }
+
+  public static boolean isKana(String value) {
+      boolean result = false;
+      if (value != null) {
+          Pattern pattern = Pattern.compile("^[\\uFF65-\\uFF9F]+$");
+          result = pattern.matcher(value).matches();
+      }
+      return result;
+  }
+
+
 }

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.log">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/css/cm_common.css" />
+<link rel="stylesheet" href="/css/tl_input.css" />
+
+<title>定期生命 検索画面</title>
+</head>
+<body>
+
+	<header class="Header">
+		<div class="Header__inner">
+			<a href="/cm/task">ダミー保険事務処理システム</a>
+		</div>
+	</header>
+	<Form th:method="POST" th:action="@{/tl/s/list}"
+		th:object="${tlSSearch}">
+		<div class="screen">
+			<Label class="title">定期生命 検索</Label>
+			<div class="main">
+				<div class="form-group">
+					<div class="column">
+						<label class="columnName">被保険者番号</label> <input type="tel"
+							spellcheck="false" th:field="*{insured_person_id}"> <label
+							class="message" th:text="*{insured_person_id_error}"></label>
+					</div>
+
+				</div>
+				<div class="buttons">
+					<Button class="confirmButton">検索</Button>
+				</div>
+			</div>
+		</div>
+	</Form>
+	<script src="/js/jquery-3.6.0.min.js"></script>
+	<script src="/js/tl_input.js"></script>
+</body>
+</html>

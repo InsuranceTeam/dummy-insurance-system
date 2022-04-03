@@ -1,0 +1,344 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+		<title>テーブル定義書&#32;ダミー保険事務処理システム&#32;支払管理</title>
+		<link rel="stylesheet" href="a5m2.css">
+	</head>
+	<body>
+	<table border="1">
+		<caption>テーブル情報</caption>
+			<colgroup>
+				<col width="115">
+				<col width="180">
+				<col width="115">
+				<col width="180">
+			</colgroup>
+			<th>システム名</th>
+			<td>ダミー保険事務処理システム&nbsp;</td>
+			<th>作成者</th>
+			<td>保険チーム&#32;&nbsp;</td>
+		</tr>
+		<tr>
+			<th>サブシステム名</th>
+			<td>支払管理&nbsp;</td>
+			<th>作成日</th>
+			<td>2021/12/11&nbsp;</td>
+		</tr>
+		<tr>
+			<th>スキーマ名</th>
+			<td>insurance_db&nbsp;</td>
+			<th>更新日</th>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<th>論理テーブル名</th>
+			<td>支払情報テーブル&nbsp;</td>
+			<th>RDBMS&nbsp;</th>
+			<td> 8.0.26&nbsp;</td>
+		</tr>
+		<tr>
+			<th>物理テーブル名</th>
+			<td>payment&nbsp;</td>
+			<th>&nbsp;</th>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td colspan="4"><b>概要：支払に関する情報を管理する</b><br></td>
+		</tr>
+	</table>
+
+<br>
+<br>
+	<table border="1">
+		<caption>カラム情報</caption>
+			<colgroup>
+				<col width="30">
+				<col width="120">
+				<col width="150">
+				<col width="120">
+				<col width="60">
+				<col width="100">
+				<col width="370">
+			</colgroup>
+		<tr>
+			<th>No.</th>
+			<th>論理名</th>
+			<th>物理名</th>
+			<th>データ型</th>
+			<th>Not Null</th>
+			<th>デフォルト</th>
+			<th>備考</th>
+		</tr>
+		<tr>
+			<td style="text-align:right;">1</td>
+			<td>支払管理番号</td>
+			<td>payment_control_id</td>
+			<td>int&#32;unsigned&#32;auto_increment</td>
+			<td>Yes (PK)</td>
+			<td></td>
+			<td>支払情報を識別するために設定されたユニークな番号<br>
+				※自動採番されるため、新規作成時はアプリ側での編集不要</td>
+		</tr>
+		<tr>
+			<td style="text-align:right;">2</td>
+			<td>支払額</td>
+			<td>payment_amount</td>
+			<td>varchar(8)</td>
+			<td>Yes</td>
+			<td></td>
+			<td>契約者へ支払われる支払額を管理する</td>
+		</tr>
+		<tr>
+			<td style="text-align:right;">3</td>
+			<td>作成日</td>
+			<td>create_at</td>
+			<td>datetime</td>
+			<td>&nbsp;</td>
+			<td>CURRENT_TIMESTAMP</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td style="text-align:right;">4</td>
+			<td>更新日</td>
+			<td>update_at</td>
+			<td>datetime&#32;on&#32;update&#32;CURRENT_TIMESTAMP</td>
+			<td>&nbsp;</td>
+			<td>CURRENT_TIMESTAMP</td>
+			<td></td>
+		</tr>
+	</table>
+
+<br>
+<br>
+	<table border="1">
+		<caption>インデックス情報</caption>
+			<colgroup>
+				<col width="30">
+				<col width="170">
+				<col width="230">
+				<col width="60">
+				<col width="100">
+			</colgroup>
+		<tr>
+			<th>No.</th>
+			<th>インデックス名</th>
+			<th>カラムリスト</th>
+			<th>ユニーク</th>
+			<th>備考</th>
+		</tr>
+		<tr>
+			<td style="text-align:right;">1</td>
+			<td>PRIMARY</td>
+			<td>payment_control_id</td>
+			<td>Yes</td>
+			<td>&nbsp;</td>
+		</tr>
+	</table>
+
+<br>
+<br>
+	<table border="1">
+		<caption>制約情報</caption>
+			<colgroup>
+				<col width="30">
+				<col width="170">
+				<col width="90">
+				<col width="300">
+			</colgroup>
+		<tr>
+			<th>No.</th>
+			<th>制約名</th>
+			<th>種類</th>
+			<th>制約定義</th>
+		</tr>
+		<tr>
+			<td style="text-align:right;">1</td>
+			<td>PRIMARY</td>
+			<td>PRIMARY&#32;KEY</td>
+			<td>payment_control_id</td>
+		</tr>
+	</table>
+
+<br>
+<br>
+	<table border="1">
+		<caption>外部キー情報</caption>
+			<colgroup>
+				<col width="30">
+				<col width="120">
+				<col width="160">
+				<col width="120">
+				<col width="160">
+			</colgroup>
+			<th>No.</th>
+			<th>外部キー名</th>
+			<th>カラムリスト</th>
+			<th>参照先</th>
+			<th>参照先カラムリスト</th>
+		</tr>
+	</table>
+
+<br>
+<br>
+	<table border="1">
+		<caption>外部キー情報(PK側)</caption>
+			<colgroup>
+				<col width="30">
+				<col width="120">
+				<col width="160">
+				<col width="120">
+				<col width="160">
+			</colgroup>
+		<tr>
+			<th>No.</th>
+			<th>外部キー名</th>
+			<th>カラムリスト</th>
+			<th>参照元</th>
+			<th>参照元カラムリスト</th>
+		</tr>
+	</table>
+
+<br>
+<br>
+	<table border="1">
+		<caption>トリガー情報</caption>
+			<colgroup>
+				<col width="30">
+				<col width="120">
+				<col width="160">
+				<col width="120">
+				<col width="160">
+			</colgroup>
+			<th>No.</th>
+			<th>トリガー名</th>
+			<th>イベント</th>
+			<th>タイミング</th>
+			<th>条件</th>
+		</tr>
+	</table>
+
+<br>
+<br>
+	<table border="1">
+		<caption>RDBMS固有の情報</caption>
+			<colgroup>
+				<col width="30">
+				<col width="220">
+				<col width="340">
+			</colgroup>
+		<tr>
+			<th>No.</th>
+			<th>プロパティ名</th>
+			<th>プロパティ値</th>
+		</tr>
+		<tr>
+			<td style="text-align:right;">1</td>
+			<td>TABLE_CATALOG</td>
+			<td>def</td>
+		</tr>
+		<tr>
+			<td style="text-align:right;">2</td>
+			<td>TABLE_SCHEMA</td>
+			<td>insurance_db</td>
+		</tr>
+		<tr>
+			<td style="text-align:right;">3</td>
+			<td>TABLE_NAME</td>
+			<td>payment</td>
+		</tr>
+		<tr>
+			<td style="text-align:right;">4</td>
+			<td>TABLE_TYPE</td>
+			<td>BASE&#32;TABLE&#32;</td>
+		</tr>
+		<tr>
+			<td style="text-align:right;">5</td>
+			<td>ENGINE</td>
+			<td>InnoDB</td>
+		</tr>
+		<tr>
+			<td style="text-align:right;">6</td>
+			<td>VERSION</td>
+			<td>10</td>
+		</tr>
+		<tr>
+			<td style="text-align:right;">7</td>
+			<td>ROW_FORMAT</td>
+			<td>Dynamic&#32;&#32;&#32;</td>
+		</tr>
+		<tr>
+			<td style="text-align:right;">8</td>
+			<td>TABLE_ROWS</td>
+			<td>1</td>
+		</tr>
+		<tr>
+			<td style="text-align:right;">9</td>
+			<td>AVG_ROW_LENGTH</td>
+			<td>16384</td>
+		</tr>
+		<tr>
+			<td style="text-align:right;">10</td>
+			<td>DATA_LENGTH</td>
+			<td>16384</td>
+		</tr>
+		<tr>
+			<td style="text-align:right;">11</td>
+			<td>MAX_DATA_LENGTH</td>
+			<td>0</td>
+		</tr>
+		<tr>
+			<td style="text-align:right;">12</td>
+			<td>INDEX_LENGTH</td>
+			<td>0</td>
+		</tr>
+		<tr>
+			<td style="text-align:right;">13</td>
+			<td>DATA_FREE</td>
+			<td>0</td>
+		</tr>
+		<tr>
+			<td style="text-align:right;">14</td>
+			<td>AUTO_INCREMENT</td>
+			<td>1000000000</td>
+		</tr>
+		<tr>
+			<td style="text-align:right;">15</td>
+			<td>CREATE_TIME</td>
+			<td>2021/12/11&#32;12:12:44</td>
+		</tr>
+		<tr>
+			<td style="text-align:right;">16</td>
+			<td>UPDATE_TIME</td>
+			<td>2022/01/16&#32;14:50:00</td>
+		</tr>
+		<tr>
+			<td style="text-align:right;">17</td>
+			<td>CHECK_TIME</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td style="text-align:right;">18</td>
+			<td>TABLE_COLLATION</td>
+			<td>utf8mb4_0900_ai_ci</td>
+		</tr>
+		<tr>
+			<td style="text-align:right;">19</td>
+			<td>CHECKSUM</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td style="text-align:right;">20</td>
+			<td>CREATE_OPTIONS</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td style="text-align:right;">21</td>
+			<td>TABLE_COMMENT</td>
+			<td>支払情報テーブル</td>
+		</tr>
+	</table>
+
+
+	</body>
+</html>

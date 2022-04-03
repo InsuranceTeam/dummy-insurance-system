@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+  <link rel="stylesheet" href="/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/tc_common.css" />
+  <title>定期医療　契約一覧画面</title>
+</head>
+<body>
+    <header class="Header">
+      <div class="Header__inner">
+        <a href="/cm/task">ダミー保険事務処理システム</a>
+        <form th:method="get" th:action="@{/tc/s/search}" th:object="${tcSSearch}">
+          <input type="hidden" th:field="*{insured_person_id_str}">
+          <button class="btn btn-link btn-link-return">戻る</button>
+        </form>
+      </div>
+    </header>
+    <div class="container">
+        <div class="title">定期医療　契約一覧画面</div>
+    </div>
+
+    <div class="Form-wrap Form-wrap-list">
+      <div class="Box-flame">
+        <table class="Form-tbl">
+          <thead>
+            <tr class="Form-list__tr">
+              <th class="Form-list__th">契約照会ボタン</th>
+              <th class="Form-list__th">被保険者番号</th>
+              <th class="Form-list__th">被保険者氏名（漢字）</th>
+              <th class="Form-list__th">被保険者氏名(ｶﾅ)</th>
+              <th class="Form-list__th">生年月日</th>
+              <th class="Form-list__th">性別</th>
+              <th class="Form-list__th">契約番号</th>
+              <th class="Form-list__th">契約開始日</th>
+              <th>契約終了日</th>
+          </thead>
+          <tbody>
+            <tr class="Form-tbl__tr" th:each="tcSList:${tcSLists}" th:object="${tcSList}">
+
+                <td class="Form-list__td">
+					<form th:method="get"
+                  	th:action="@{/tc/s/contract/{contract_key}(contract_key=|*{insured_person_id}&*{contract_id})}">
+                  	<button class="Form-list-area__btn" th:text="契約照会"></button>
+                	</form>
+                </td>
+
+
+
+              <!-- 被保険者番号 -->
+              <td class="Form-list__td">
+               <div th:text="*{insured_person_id}"></div>
+              </td>
+
+              <!-- 被保険者氏名（漢字） -->
+              <td class="Form-list__td">
+                  <div  th:text="*{insured_person_name_kanji}"></div>
+              </td>
+
+              <!-- 被保険者氏名(ｶﾅ) -->
+              <td class="Form-list__td">
+                  <div  th:text="*{insured_person_name_kana}"></div>
+              </td>
+
+              <!-- 生年月日 -->
+              <td class="Form-list__td">
+                  <div
+                   th:text=  "*{#strings.substring(insured_person_birth_date,0,4)} + '/'
+                            + *{#strings.substring(insured_person_birth_date,4,6)} + '/'
+                            + *{#strings.substring(insured_person_birth_date,6,8)}">
+                  </div>
+              </td>
+
+              <!-- 性別 -->
+              <td class="Form-list__td">
+                  <div th:if="*{insured_person_sex} == '1'">
+                    <div th:text="男"></div>
+                  </div>
+                  <div th:if="*{insured_person_sex} == '2'">
+                    <div th:text="女"></div>
+                  </div>
+              </td>
+
+              <!-- 契約番号 -->
+              <td class="Form-list__td">
+                  <div th:text="*{contract_id}"></div>
+              </td>
+
+              <!-- 契約開始日 -->
+              <td class="Form-list__td">
+                  <div
+                   th:text=  "*{#strings.substring(contract_start_date,0,4)} + '/'
+                            + *{#strings.substring(contract_start_date,4,6)} + '/'
+                            + *{#strings.substring(contract_start_date,6,8)}">
+                  </div>
+              </td>
+
+              <!-- 契約終了日 -->
+              <td class="Form-list__td">
+                  <div th:if="*{contract_end_date} != '00000000'">
+                    <div
+                     th:text=  "*{#strings.substring(contract_end_date,0,4)} + '/'
+                              + *{#strings.substring(contract_end_date,4,6)} + '/'
+                              + *{#strings.substring(contract_end_date,6,8)}">
+                    </div>
+                  </div>
+                  <div th:if="*{contract_end_date} == '00000000'">
+                    <div >　　　　　</div>
+                  </div>
+
+
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+</body>
+</html>

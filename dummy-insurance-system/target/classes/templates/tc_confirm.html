@@ -6,185 +6,185 @@
 <link rel="stylesheet" href="/css/bootstrap.min.css" />
 <link rel="stylesheet" href="/css/tc_common.css" />
 <link rel="stylesheet"
-	href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 
 <!-- jQuery -->
 <script src="/js/jquery-3.6.0.min.js"></script>
 <!-- jQuery UI -->
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+    src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
 <title>定期医療 確認画面</title>
 </head>
 <body>
-	<header class="Header">
-		<div class="Header__inner">
-			<a href="/cm/task">ダミー保険事務処理システム</a>
-			<form th:method="get" th:action="@{/tc/input}" th:object="${TcInput}">
-				<input name="insured_person_name_kanji_sei" type="hidden"
-					th:value="*{insured_person_name_kanji_sei}"> <input
-					name="insured_person_name_kanji_mei" type="hidden"
-					th:value="*{insured_person_name_kanji_mei}"> <input
-					name="insured_person_name_kana_sei" type="hidden"
-					th:value="*{insured_person_name_kana_sei}"> <input
-					name="insured_person_name_kana_mei" type="hidden"
-					th:value="*{insured_person_name_kana_mei}"> <input
-					name="insured_person_birth_date" type="hidden"
-					th:value="*{insured_person_birth_date}"> <input
-					name="insured_person_sex" type="hidden"
-					th:value="*{insured_person_sex}"> <input
-					name="contract_date" type="hidden" th:value="*{contract_date}">
-				<input name="payment_method" type="hidden"
-					th:value="*{payment_method}"> <input name="contract_term"
-					type="hidden" th:value="*{contract_term}"> <input
-					name="hospital_cash" type="hidden" th:value="*{hospital_cash}">
+    <header class="Header">
+        <div class="Header__inner">
+            <a href="/cm/task">ダミー保険事務処理システム</a>
+            <form th:method="get" th:action="@{/tc/input}" th:object="${TcInput}">
+                <input name="insured_person_name_kanji_sei" type="hidden"
+                    th:value="*{insured_person_name_kanji_sei}"> <input
+                    name="insured_person_name_kanji_mei" type="hidden"
+                    th:value="*{insured_person_name_kanji_mei}"> <input
+                    name="insured_person_name_kana_sei" type="hidden"
+                    th:value="*{insured_person_name_kana_sei}"> <input
+                    name="insured_person_name_kana_mei" type="hidden"
+                    th:value="*{insured_person_name_kana_mei}"> <input
+                    name="insured_person_birth_date" type="hidden"
+                    th:value="*{insured_person_birth_date}"> <input
+                    name="insured_person_sex" type="hidden"
+                    th:value="*{insured_person_sex}"> <input
+                    name="contract_date" type="hidden" th:value="*{contract_date}">
+                <input name="payment_method" type="hidden"
+                    th:value="*{payment_method}"> <input name="contract_term"
+                    type="hidden" th:value="*{contract_term}"> <input
+                    name="hospital_cash" type="hidden" th:value="*{hospital_cash}">
 
-				<button class="btn btn-link btn-link-return">戻る</button>
-			</form>
-		</div>
-	</header>
-	<div class="container">
-		<div class="card card-primary mb-3">
-			<div class="card-header">
-				<h5 class="card-title">定期医療 加入確認画面</h5>
-			</div>
-			<div class="l-base">
-				<form th:method="post" th:action="@{/tc/completion}"
-					th:object="${TcConfirmation}" class="Form-wrap">
-					<div class="Box-flame">
-						<table class="Form-tbl">
-							<tbody>
+                <button class="btn btn-link btn-link-return">戻る</button>
+            </form>
+        </div>
+    </header>
+    <div class="container">
+        <div class="card card-primary mb-3">
+            <div class="card-header">
+                <h5 class="card-title">定期医療 加入確認画面</h5>
+            </div>
+            <div class="l-base">
+                <form th:method="post" th:action="@{/tc/completion}"
+                    th:object="${TcConfirmation}" class="Form-wrap">
+                    <div class="Box-flame">
+                        <table class="Form-tbl">
+                            <tbody>
 
-								<tr class="Form-tbl__tr">
-									<th class="Form-tbl__th"><div class="Form-name">被保険者氏名（漢字）</div></th>
-									<td id="name_kanji_surname" class="Form-tbl__td">
+                                <tr class="Form-tbl__tr">
+                                    <th class="Form-tbl__th"><div class="Form-name">被保険者氏名（漢字）</div></th>
+                                    <td id="name_kanji_surname" class="Form-tbl__td">
 
-										<div
-											th:text="|*{insured_person_name_kanji_sei} 　
+                                        <div
+                                            th:text="|*{insured_person_name_kanji_sei} 　
                                       *{insured_person_name_kanji_mei}|">
-										</div> <input name="insured_person_name_kanji_sei" type="hidden"
-										th:value="*{insured_person_name_kanji_sei}"> <input
-										name="insured_person_name_kanji_mei" type="hidden"
-										th:value="*{insured_person_name_kanji_mei}">
-									</td>
-								</tr>
-								<tr class="Form-tbl__tr">
-									<th class="Form-tbl__th"><div class="Form-name">被保険者氏名（カナ）</div></th>
-									<td id="name_kana" class="Form-tbl__td">
+                                        </div> <input name="insured_person_name_kanji_sei" type="hidden"
+                                        th:value="*{insured_person_name_kanji_sei}"> <input
+                                        name="insured_person_name_kanji_mei" type="hidden"
+                                        th:value="*{insured_person_name_kanji_mei}">
+                                    </td>
+                                </tr>
+                                <tr class="Form-tbl__tr">
+                                    <th class="Form-tbl__th"><div class="Form-name">被保険者氏名（カナ）</div></th>
+                                    <td id="name_kana" class="Form-tbl__td">
 
-										<div
-											th:text="|*{insured_person_name_kana_sei}
+                                        <div
+                                            th:text="|*{insured_person_name_kana_sei}
                                        　*{insured_person_name_kana_mei}|">
-										</div> <input name="insured_person_name_kana_sei" type="hidden"
-										th:value="*{insured_person_name_kana_sei}"> <input
-										name="insured_person_name_kana_mei" type="hidden"
-										th:value="*{insured_person_name_kana_mei}">
-									</td>
-								</tr>
-								<tr class="Form-tbl__tr">
-									<th class="Form-tbl__th"><div class="Form-name">生年月日</div></th>
-									<td id="birth_date" class="Form-tbl__td">
+                                        </div> <input name="insured_person_name_kana_sei" type="hidden"
+                                        th:value="*{insured_person_name_kana_sei}"> <input
+                                        name="insured_person_name_kana_mei" type="hidden"
+                                        th:value="*{insured_person_name_kana_mei}">
+                                    </td>
+                                </tr>
+                                <tr class="Form-tbl__tr">
+                                    <th class="Form-tbl__th"><div class="Form-name">生年月日</div></th>
+                                    <td id="birth_date" class="Form-tbl__td">
 
-										<div th:text="*{insured_person_birth_date}"></div> <input
-										name="insured_person_birth_date" type="hidden"
-										th:value="*{insured_person_birth_date}" />
+                                        <div th:text="*{insured_person_birth_date}"></div> <input
+                                        name="insured_person_birth_date" type="hidden"
+                                        th:value="*{insured_person_birth_date}" />
 
-									</td>
-								</tr>
+                                    </td>
+                                </tr>
 
-								<tr class="Form-tbl__tr">
-									<th class="Form-tbl__th"><div class="Form-name">性別</div></th>
-									<td id="sex" class="Form-tbl__td">
+                                <tr class="Form-tbl__tr">
+                                    <th class="Form-tbl__th"><div class="Form-name">性別</div></th>
+                                    <td id="sex" class="Form-tbl__td">
 
-										<div th:if="*{insured_person_sex=='1'}">
-											<div th:text="男性"></div>
-										</div>
-										<div th:if="*{insured_person_sex=='2'}">
-											<div th:text="女性"></div>
-										</div> <input name="insured_person_sex" type="hidden"
-										th:value=*{insured_person_sex}>
+                                        <div th:if="*{insured_person_sex=='1'}">
+                                            <div th:text="男性"></div>
+                                        </div>
+                                        <div th:if="*{insured_person_sex=='2'}">
+                                            <div th:text="女性"></div>
+                                        </div> <input name="insured_person_sex" type="hidden"
+                                        th:value=*{insured_person_sex}>
 
-									</td>
-								</tr>
+                                    </td>
+                                </tr>
 
 
-								<tr class="Form-tbl__tr">
-									<th class="Form-tbl__th"><div class="Form-name">加入日</div></th>
-									<td id="contract_date" class="Form-tbl__td">
+                                <tr class="Form-tbl__tr">
+                                    <th class="Form-tbl__th"><div class="Form-name">加入日</div></th>
+                                    <td id="contract_date" class="Form-tbl__td">
 
-										<div th:text="*{contract_date}"></div> <input
-										name="contract_date" type="hidden" th:value="*{contract_date}" />
+                                        <div th:text="*{contract_date}"></div> <input
+                                        name="contract_date" type="hidden" th:value="*{contract_date}" />
 
-									</td>
-								</tr>
+                                    </td>
+                                </tr>
 
-								<tr class="Form-tbl__tr">
-									<th class="Form-tbl__th"><div class="Form-name">加入年齢</div></th>
-									<td id="start_date" class="Form-tbl__td">
+                                <tr class="Form-tbl__tr">
+                                    <th class="Form-tbl__th"><div class="Form-name">加入年齢</div></th>
+                                    <td id="start_date" class="Form-tbl__td">
 
-										<div th:text="|*{entry_age}歳|"></div> <input name="entry_age"
-										type="hidden" th:value="*{entry_age}" />
+                                        <div th:text="|*{entry_age}歳|"></div> <input name="entry_age"
+                                        type="hidden" th:value="*{entry_age}" />
 
-									</td>
-								</tr>
+                                    </td>
+                                </tr>
 
-								<tr class="Form-tbl__tr">
-									<th class="Form-tbl__th"><div class="Form-name">払込方法</div></th>
-									<td id="payment_method" class="Form-tbl__td">
+                                <tr class="Form-tbl__tr">
+                                    <th class="Form-tbl__th"><div class="Form-name">払込方法</div></th>
+                                    <td id="payment_method" class="Form-tbl__td">
 
-										<div th:if="*{payment_method=='1'}">
-											<div th:text="月払"></div>
-										</div>
-										<div th:if="*{payment_method=='3'}">
-											<div th:text="年払"></div>
-										</div> <input name="payment_method" type="hidden"
-										th:value=*{payment_method}>
+                                        <div th:if="*{payment_method=='1'}">
+                                            <div th:text="月払"></div>
+                                        </div>
+                                        <div th:if="*{payment_method=='3'}">
+                                            <div th:text="年払"></div>
+                                        </div> <input name="payment_method" type="hidden"
+                                        th:value=*{payment_method}>
 
-									</td>
-								</tr>
+                                    </td>
+                                </tr>
 
-								<tr class="Form-tbl__tr">
-									<th class="Form-tbl__th"><div class="Form-name">契約期間（年）</div></th>
-									<td id="contract_term" class="Form-tbl__td">
+                                <tr class="Form-tbl__tr">
+                                    <th class="Form-tbl__th"><div class="Form-name">契約期間（年）</div></th>
+                                    <td id="contract_term" class="Form-tbl__td">
 
-										<div th:text="*{contract_term}"></div> <input
-										name="contract_term" type="hidden" th:value="*{contract_term}" />
+                                        <div th:text="*{contract_term}"></div> <input
+                                        name="contract_term" type="hidden" th:value="*{contract_term}" />
 
-									</td>
-								</tr>
+                                    </td>
+                                </tr>
 
-								<tr class="Form-tbl__tr">
-									<th class="Form-tbl__th"><div class="Form-name">入院日額（円）</div></th>
-									<td id="hospital_cash" class="Form-tbl__td">
+                                <tr class="Form-tbl__tr">
+                                    <th class="Form-tbl__th"><div class="Form-name">入院日額（円）</div></th>
+                                    <td id="hospital_cash" class="Form-tbl__td">
 
-										<div th:text="*{hospital_cash}"></div> <input
-										name="hospital_cash" type="hidden" th:value="*{hospital_cash}" />
+                                        <div th:text="*{hospital_cash}"></div> <input
+                                        name="hospital_cash" type="hidden" th:value="*{hospital_cash}" />
 
-									</td>
-								</tr>
-								<tr class="Form-tbl__tr">
-									<th class="Form-tbl__th"><div class="Form-name">入院日額（円）</div></th>
-									<td id="premium" class="Form-tbl__td">
+                                    </td>
+                                </tr>
+                                <tr class="Form-tbl__tr">
+                                    <th class="Form-tbl__th"><div class="Form-name">掛金（円）</div></th>
+                                    <td id="premium" class="Form-tbl__td">
 
-										<div
-											th:text="|*{#numbers.formatInteger(premium, 3, 'COMMA')}　円|"></div>
-										<input name="premium" type="hidden" th:value="*{premium}" />
+                                        <div
+                                            th:text="|*{#numbers.formatInteger(premium, 3, 'COMMA')}　円|"></div>
+                                        <input name="premium" type="hidden" th:value="*{premium}" />
 
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<div id="entry_btn" class="Control-area">
-						<button class="Control-area__btn">加入</button>
-					</div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="entry_btn" class="Control-area">
+                        <button class="Control-area__btn">加入</button>
+                    </div>
 
-				</form>
-			</div>
-		</div>
-	</div>
-	<script src="/js/jquery-3.6.0.min"></script>
-	<script src="/js/bootstrap.min.js"></script>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="/js/jquery-3.6.0.min"></script>
+    <script src="/js/bootstrap.min.js"></script>
 </body>
 </html>

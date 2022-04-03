@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+
+<body>
+
+  <div th:fragment="tc_k_input">
+    <!-- 解約／取消　入力画面（モーダルウィンドウで表示） -->
+    <input type="hidden" id="overlay_display" th:value="${overlay_display}">
+    <div id="overlay" class="overlay"></div>
+    <div class="modal-window" th:object="${tcKInput.tcSContract}">
+
+      <div class="subtitle">解約／取消　入力画面</div>
+      <div th:if="*{contract_end_reason} == ''">
+        <button class="js-close button-close" th:text="'×'"></button>
+
+            <form th:method="post" th:action="@{/tc/k/confirmation}" th:object="${tcKInput}">
+            <div class="Box-flame">
+                <table class="Form-tbl">
+                    <caption class="caption-com">保全内容を選択してください</caption>
+                    <tbody>
+                        <tr class="Form-tbl__tr">
+                            <th class="Form-tbl__th">
+                                <div class="Form-name">解約</div>
+                            </th>
+
+                            <td class="Form-tbl__td">
+                                <div class="Date-box Date-box--w01">
+                                    <input id="cancel" name="select_cancel" type="radio" value="1"
+                                         class="Input-radio" th:checked="*{select_cancel != '2'}">
+                                         <label for="cancel"
+                                        class="Input Input--w03 Label-radio Label-cancel">解約</label>
+                                    <div class="Date-box Date-box-show">
+
+                                        <input class="Input Input--w01 " type="date" id="datepicker_cancel"
+                                           value="" min="1900-01-01" max="9999-12-31" name="cancel_date" th:value="*{cancel_date}"/>
+                                    </div>
+
+                                </div>
+                            </td>
+                        <tr>
+                        <tr class="Form-tbl__tr">
+                            <th class="Form-tbl__th">
+                                <div class="Form-name">取消</div>
+                            </th>
+                            <td class="Form-tbl__td">
+                                <div class="Date-box Date-box--w01">
+                                    <input id="rescission" name="select_cancel" type="radio"
+                                         value="2" class="Input-radio" th:checked="*{select_cancel == '2'}">
+                                         <label for="rescission"
+                                        class="Input Input--w03 Label-radio Label-rescission">取消</label>
+                                </div>
+                        </tr>
+                    </tbody>
+            </table>
+
+
+
+
+            </div>
+                  <button class="button-confirm">確認</button>
+                  <div class="text-danger" th:if="${#fields.hasErrors('cancel_date')}"
+                       th:errors="*{cancel_date}"></div>
+
+
+
+
+          <!--照会画面の情報は、解約・取消処理を行なうために必要なため、引き継ぐ -->
+          <input type="hidden" th:field="*{tcSContract.insured_person_id}">
+          <input type="hidden" th:field="*{tcSContract.insured_person_name_kanji}">
+          <input type="hidden" th:field="*{tcSContract.insured_person_name_kana}">
+          <input type="hidden" th:field="*{tcSContract.insured_person_birth_date}">
+          <input type="hidden" th:field="*{tcSContract.insured_person_sex}">
+          <input type="hidden" th:field="*{tcSContract.ip_update_at}">
+          <input type="hidden" th:field="*{tcSContract.contract_id}">
+          <input type="hidden" th:field="*{tcSContract.contract_history_id}">
+          <input type="hidden" th:field="*{tcSContract.contract_start_date}">
+          <input type="hidden" th:field="*{tcSContract.contract_end_date}">
+          <input type="hidden" th:field="*{tcSContract.contract_end_reason}">
+          <input type="hidden" th:field="*{tcSContract.contract_maturity_date}">
+          <input type="hidden" th:field="*{tcSContract.security_type}">
+          <input type="hidden" th:field="*{tcSContract.entry_age}">
+          <input type="hidden" th:field="*{tcSContract.payment_method}">
+          <input type="hidden" th:field="*{tcSContract.insurance_money}">
+          <input type="hidden" th:field="*{tcSContract.premium}">
+          <input type="hidden" th:field="*{tcSContract.premium_payment_term}">
+          <input type="hidden" th:field="*{tcSContract.contract_term}">
+          <input type="hidden" th:field="*{tcSContract.payment_expiration_age}">
+          <input type="hidden" th:field="*{tcSContract.c_update_at}">
+          <input type="hidden" th:field="*{tcSContract.payment_control_id}">
+          <input type="hidden" th:field="*{tcSContract.payment_amount}">
+          <input type="hidden" th:field="*{tcSContract.p_update_at}">
+
+        </form>
+
+      </div>
+
+      <div th:if="*{contract_end_reason} != ''">
+        <div class="text-danger-cancel"  th:text="すでに保全済みのため、解約／取消できません"></div>
+        <button class="js-close button-close" th:text="'×'"></button>
+      </div>
+
+
+    </div>
+
+  </div>
+
+</body>
+</html>

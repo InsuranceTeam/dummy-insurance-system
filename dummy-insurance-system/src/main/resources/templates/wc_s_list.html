@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/cm_common.css"/>
+  <link rel="stylesheet" href="/css/wc_common.css"/>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+  
+    <!-- jQuery -->
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <!-- jQuery UI -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+    <!-- jQuery local -->
+
+  <title>終身医療　契約一覧画面</title>
+</head>
+<body>
+<!-- 終身医療の入力画面はここに作成願います -->
+
+<!-- 
+  <nav class="navbar navbar-inverse">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/cm/task">ダミー保険処理システム</a>
+        <form th:method="get" th:action="@{/wc/s/search}" th:object="${wcSSearch}">
+          <input type="hidden" th:field="*{insured_person_id_str}">
+          <button class="btn btn-link btn-link-return btn_large">戻る</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+   -->
+  
+  <header class="Header">
+    <div class="Header__inner">
+      <a href="/cm/task">ダミー保険事務処理システム</a>
+      <form th:method="get" th:action="@{/wc/s/search}" th:object="${wcSSearch}">
+        <input type="hidden" th:field="*{insured_person_id_str}">
+        <button class="btn btn-link btn-link-return btn_large">戻る</button>
+      </form>
+    </div>
+  </header>
+  
+  
+  <div class="container">
+    <h1 class="text-center title">終身医療  契約一覧画面</h1>
+  </div>
+  
+  <div class="wc_input_area">
+      <div class="Box-flame">
+        <table class="table_s_list">
+          <thead>
+            <tr class="table_s_list_tr">
+              <th class="table_s_list_th">被保険者番号</th>
+              <th class="table_s_list_th">被保険者氏名（漢字）</th>
+              <th class="table_s_list_th">被保険者氏名(ｶﾅ)</th>
+              <th class="table_s_list_th">生年月日</th>
+              <th class="table_s_list_th">性別</th>
+              <th class="table_s_list_th">契約番号</th>
+              <th class="table_s_list_th">契約開始日</th>
+              <th class="table_s_list_th">契約終了日</th>
+              <th class="table_s_list_th"></th>
+          </thead>
+          <tbody>
+            <tr class="table_s_list_tr" th:each="wcSList:${wcSLists}" th:object="${wcSList}">
+
+              <!-- 被保険者番号 -->
+              <td class="table_s_list_td">
+                <div th:text="*{insured_person_id}">
+                </div>
+              </td>
+
+              <!-- 被保険者氏名（漢字） -->
+              <td class="table_s_list_td">
+                <div th:text="*{insured_person_name_kanji}"></div>
+              </td>
+
+              <!-- 被保険者氏名(ｶﾅ) -->
+              <td class="table_s_list_td">
+                <div th:text="*{insured_person_name_kana}"></div>
+              </td>
+
+              <!-- 生年月日 -->
+              <td class="table_s_list_td">
+                  <div th:text=  "*{#strings.substring(insured_person_birth_date,0,4)} + '/'
+                                 + *{#strings.substring(insured_person_birth_date,4,6)} + '/'
+                                 + *{#strings.substring(insured_person_birth_date,6,8)}">
+                  </div>
+              </td>
+
+              <!-- 性別 -->
+              <td class="table_s_list_td">
+                  <div th:if="*{insured_person_sex} == '1'">
+                    <div th:text="男"></div>
+                  </div>
+                  <div th:if="*{insured_person_sex} == '2'">
+                    <div th:text="女"></div>
+                  </div>
+              </td>
+
+              <!-- 契約番号 -->
+              <td class="table_s_list_td">
+                <div th:text="*{contract_id}"></div>
+              </td>
+
+              <!-- 契約開始日 -->
+              <td class="table_s_list_td">
+                <div th:text=  "*{#strings.substring(contract_start_date,0,4)} + '/'
+                              + *{#strings.substring(contract_start_date,4,6)} + '/'
+                              + *{#strings.substring(contract_start_date,6,8)}">
+                </div>
+              </td>
+
+              <!-- 契約終了日 -->
+              <td class="table_s_list_td">
+                
+                  <div th:if="*{contract_end_date} != '00000000'">
+                    <div 
+                     th:text=  "*{#strings.substring(contract_end_date,0,4)} + '/'
+                              + *{#strings.substring(contract_end_date,4,6)} + '/'
+                              + *{#strings.substring(contract_end_date,6,8)}">
+                    </div>
+                  </div>
+                  <div th:if="*{contract_end_date} == '00000000'">
+                    <div  >　　　　　</div>
+                  </div>
+              </td>
+              
+              <!-- 参照ボタン -->
+              <td class="table_s_list_td_end">
+                <form th:method="get"
+                  th:action="@{/wc/s/reference/{reference_key}(reference_key=|*{insured_person_id}&*{contract_id})}">
+                  <button class="reference_btn">
+                    照会画面
+                  </button>
+                </form>
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+
+     <!-- <script src="/js/jquery-3.6.0.min"></script>  -->
+  <script src="/js/bootstrap.min.js"></script>
+</body>
+</html>

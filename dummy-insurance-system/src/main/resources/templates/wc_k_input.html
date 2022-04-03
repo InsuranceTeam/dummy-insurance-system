@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+
+  <div th:fragment="k_input">
+    <!-- 解約／取消　入力画面（モーダルウィンドウで表示） -->
+    <input type="hidden" id="overlay_display" th:value="${overlay_display}">
+    <div id="overlay" class="overlay"></div>
+    <div class="modal-window" th:object="${wcKInput.wcSReference}">
+
+      <div class="cancel_subtitle">解約／取消　入力画面</div>
+
+      <div th:if="*{contract_end_reason} == ''">
+        <button class="js-close button-close" th:text="'×'"></button>
+
+        <form th:method="post" th:action="@{/wc/k/confirmation}" th:object="${wcKInput}">
+
+          <table class="cancel_table">
+            <!--  tbody>
+              <tr class="Cancel-title"><td><div class="Date-box-cancel-title">解約・取消　区分</div></td> </tr>
+              <tr class="Cancel-input">
+                <td>
+                  <div id="expiration_age" class="Select-wrap Select-wrap-cancel">
+                    <select id="select-cancel" class="Custom-select"  th:field="*{select_cancel}" >
+                      <option label="解約"  value="1" >解約</option>
+                      <option label="取消"  value="2" >取消</option>
+                    </select>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+            -->
+
+            <tbody>
+              <tr class="cancel_tr">
+                <td>
+                  <div class="cancel_title">解約・取消　区分</div>
+                </td>
+              </tr>
+              <tr class="cancel_tr">
+                <td class="cancel_radio">
+                  <div class="radio_border">
+                    <input id="kaiyaku" class="radio_area" type="radio" name="select_cancel" value="1"
+                          th:checked="*{select_cancel != '2'}" th:field="*{select_cancel}"/>
+                    <label for="kaiyaku" class="label_toggle_button">解約
+                    </label>
+                  </div>
+                  <div class="radio_border">
+                    <input id="torikeshi" class="radio_area" type="radio" name="select_cancel" value="2"
+                        th:checked="*{select_cancel == '2'}" th:field="*{select_cancel}"/>
+                    <label for="torikeshi" class="label_toggle_button">取消
+                    </label>
+                  </div>
+                </td>
+              </tr>
+
+            </tbody>
+
+            <tbody>
+              <tr class="cancel_tr"><td><div class="Date-box-show cancel_title">解約日</div></td> </tr>
+              <tr class="cancel_tr">
+                <td>
+                  <div class="Date-box-show">
+                    <input type="text" id="datepicker_cancel" class="cancel_input datepicker_cancel"
+                     th:field="*{cancel_date}" placeholder="yyyy/mm/dd">
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+
+            <tbody>
+              <tr class="cancel_tr"><td><div class="cancel_title"></div></td> </tr>
+              <tr class="cancel_tr">
+                <td>
+                  <div class="text-danger" th:if="${#fields.hasErrors('cancel_date')}"
+                       th:errors="*{cancel_date}"></div>
+                </td>
+              </tr>
+            </tbody>
+
+            <tbody>
+              <tr><td>
+                <div id="confirmation_btn" class="confirm" >
+                  <button id="confirmBtn" class="confirm_btn">確認</button>
+                </div>
+              </td></tr>
+
+          </table>
+
+          <!--照会画面の情報は、解約・取消処理を行なうために必要なため、引き継ぐ -->
+          <input type="hidden" th:field="*{wcSReference.insured_person_id}">
+          <input type="hidden" th:field="*{wcSReference.insured_person_name_kanji}">
+          <input type="hidden" th:field="*{wcSReference.insured_person_name_kana}">
+          <input type="hidden" th:field="*{wcSReference.insured_person_birth_date}">
+          <input type="hidden" th:field="*{wcSReference.insured_person_sex}">
+          <input type="hidden" th:field="*{wcSReference.ip_update_at}">
+          <input type="hidden" th:field="*{wcSReference.contract_id}">
+          <input type="hidden" th:field="*{wcSReference.contract_history_id}">
+          <input type="hidden" th:field="*{wcSReference.contract_start_date}">
+          <input type="hidden" th:field="*{wcSReference.contract_end_date}">
+          <input type="hidden" th:field="*{wcSReference.contract_end_reason}">
+          <input type="hidden" th:field="*{wcSReference.contract_maturity_date}">
+          <input type="hidden" th:field="*{wcSReference.security_type}">
+          <input type="hidden" th:field="*{wcSReference.entry_age}">
+          <input type="hidden" th:field="*{wcSReference.payment_method}">
+          <input type="hidden" th:field="*{wcSReference.insurance_money}">
+          <input type="hidden" th:field="*{wcSReference.premium}">
+          <input type="hidden" th:field="*{wcSReference.premium_payment_term}">
+          <input type="hidden" th:field="*{wcSReference.contract_term}">
+          <input type="hidden" th:field="*{wcSReference.payment_expiration_age}">
+          <input type="hidden" th:field="*{wcSReference.c_update_at}">
+          <input type="hidden" th:field="*{wcSReference.payment_control_id}">
+          <input type="hidden" th:field="*{wcSReference.payment_amount}">
+          <input type="hidden" th:field="*{wcSReference.p_update_at}">
+
+        </form>
+
+      </div>
+
+      <div th:if="*{contract_end_reason} != ''">
+        <!--  <div class="text-danger"  th:text="すでに解約／取消を行っています"></div> -->
+        <div class="text-danger-cancel">すでに解約／取消を行っています</div>
+        <button class="js-close button-close" th:text="'×'"></button>
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>

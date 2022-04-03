@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+
+<body class="no_scroll">
+
+  <div th:fragment="tc_k_confirmation">
+    <!-- 解約／取消　確認画面（モーダルウィンドウで表示） -->
+    <input type="hidden" id="overlay_display" th:value="${overlay_display}">
+    <div id="overlay" class="overlay"></div>
+    <div class="modal-window">
+
+
+      <div class="subtitle">解約／取消　確認画面</div>
+
+
+        <div th:object="${tcKConfimation}">
+
+          <table class="Date-box-cancel">
+            <tbody>
+              <tr class="Cancel-title"><td class="Form-tbl__cancel__head__td"><div class="Date-box-cancel-title">解約・取消　区分</div></td> </tr>
+              <tr class="Cancel-input">
+                <td class="Form-tbl__cancel__td">
+                  <div class="Select_cancel_label">
+                    <div th:if="*{select_cancel=='1'}"><div class="Select_cancel_value" th:text="解約"></div></div>
+                    <div th:if="*{select_cancel=='2'}"><div class="Select_cancel_value" th:text="取消"></div></div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+
+            <tbody>
+                <tr class="Cancel-title "><td class="Form-tbl__cancel__head__td">
+                  <div th:if="*{select_cancel=='1'}">
+                    <div class="Date-box-show Date-box-cancel-title">解約日</div>
+                  </div>
+                  <div th:if="*{select_cancel=='2'}">
+                    <div class="Date-box-show Date-box-cancel-title">取消日（＝契約発効日）</div>
+                  </div>
+                  </td></tr>
+
+                <tr class="Cancel-input">
+                  <td  class="Form-tbl__cancel__td">
+                    <div th:if="*{select_cancel=='1'}">
+                      <div class="Select_cancel_label">
+                        <div class="Select_cancel_value" th:text="*{cancel_date}"></div>
+                      </div>
+                    </div>
+                    <div th:if="*{select_cancel=='2'}">
+                      <div class="Select_cancel_label">
+                        <div class="Select_cancel_value"
+                              th:text=  "*{#strings.substring(tcSContract.contract_start_date,0,4)} + '/'
+                                       + *{#strings.substring(tcSContract.contract_start_date,4,6)} + '/'
+                                       + *{#strings.substring(tcSContract.contract_start_date,6,8)}">
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+            </tbody>
+
+            <tbody>
+              <tr class="Cancel-title"><td class="Form-tbl__cancel__head__td"><div class="Date-box-cancel-title ">解約返戻金</div></td> </tr>
+              <tr class="Cancel-input">
+                <td  class="Form-tbl__cancel__td">
+                  <div th:if="*{select_cancel=='1'}">
+                    <div class="Select_cancel_label">
+                      <div th:if="*{cancellation_refund != 0}">
+                        <div class="Select_cancel_value"
+                             th:text="|*{#numbers.formatInteger(cancellation_refund, 3, 'COMMA')}　円|"></div>
+                      </div>
+                      <div th:if="*{cancellation_refund == 0}">
+                        <div class="Select_cancel_value" th:text="|*{cancellation_refund}　円|"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div th:if="*{select_cancel=='2'}">
+                    <div class="Select_cancel_label">
+                      <div class="Select_cancel_value" th:text="|0　円|"></div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+
+            <tbody>
+          </table>
+          </div>
+          <div class="button-area">
+          <form th:method="post" th:action="@{/tc/k/contract}" th:object="${tcKConfimation}">
+          <button class="button-update">更新</button>
+          <!--照会画面の情報は、解約・取消処理を行なうために必要なため、引き継ぐ -->
+          <input type="hidden" th:field="*{tcSContract.insured_person_id}">
+          <input type="hidden" th:field="*{tcSContract.insured_person_name_kanji}">
+          <input type="hidden" th:field="*{tcSContract.insured_person_name_kana}">
+          <input type="hidden" th:field="*{tcSContract.insured_person_birth_date}">
+          <input type="hidden" th:field="*{tcSContract.insured_person_sex}">
+          <input type="hidden" th:field="*{tcSContract.ip_update_at}">
+          <input type="hidden" th:field="*{tcSContract.contract_id}">
+          <input type="hidden" th:field="*{tcSContract.contract_history_id}">
+          <input type="hidden" th:field="*{tcSContract.contract_start_date}">
+          <input type="hidden" th:field="*{tcSContract.contract_end_date}">
+          <input type="hidden" th:field="*{tcSContract.contract_end_reason}">
+          <input type="hidden" th:field="*{tcSContract.contract_maturity_date}">
+          <input type="hidden" th:field="*{tcSContract.security_type}">
+          <input type="hidden" th:field="*{tcSContract.entry_age}">
+          <input type="hidden" th:field="*{tcSContract.payment_method}">
+          <input type="hidden" th:field="*{tcSContract.insurance_money}">
+          <input type="hidden" th:field="*{tcSContract.premium}">
+          <input type="hidden" th:field="*{tcSContract.premium_payment_term}">
+          <input type="hidden" th:field="*{tcSContract.contract_term}">
+          <input type="hidden" th:field="*{tcSContract.payment_expiration_age}">
+          <input type="hidden" th:field="*{tcSContract.c_update_at}">
+          <input type="hidden" th:field="*{tcSContract.payment_control_id}">
+          <input type="hidden" th:field="*{tcSContract.payment_amount}">
+          <input type="hidden" th:field="*{tcSContract.p_update_at}">
+          <input type="hidden" th:field="*{select_cancel}">
+          <input type="hidden" th:field="*{cancel_date}">
+          <input type="hidden" th:field="*{cancellation_refund}">
+
+        </form>
+        <form th:method="post" th:action="@{/tc/k/input}"  th:object="${tcKConfimation}">
+          <button class="button-return">戻る</button>
+          <input type="hidden" th:field="*{tcSContract.insured_person_id}">
+          <input type="hidden" th:field="*{tcSContract.insured_person_name_kanji}">
+          <input type="hidden" th:field="*{tcSContract.insured_person_name_kana}">
+          <input type="hidden" th:field="*{tcSContract.insured_person_birth_date}">
+          <input type="hidden" th:field="*{tcSContract.insured_person_sex}">
+          <input type="hidden" th:field="*{tcSContract.ip_update_at}">
+          <input type="hidden" th:field="*{tcSContract.contract_id}">
+          <input type="hidden" th:field="*{tcSContract.contract_history_id}">
+          <input type="hidden" th:field="*{tcSContract.contract_start_date}">
+          <input type="hidden" th:field="*{tcSContract.contract_end_date}">
+          <input type="hidden" th:field="*{tcSContract.contract_end_reason}">
+          <input type="hidden" th:field="*{tcSContract.contract_maturity_date}">
+          <input type="hidden" th:field="*{tcSContract.security_type}">
+          <input type="hidden" th:field="*{tcSContract.entry_age}">
+          <input type="hidden" th:field="*{tcSContract.payment_method}">
+          <input type="hidden" th:field="*{tcSContract.insurance_money}">
+          <input type="hidden" th:field="*{tcSContract.premium}">
+          <input type="hidden" th:field="*{tcSContract.premium_payment_term}">
+          <input type="hidden" th:field="*{tcSContract.contract_term}">
+          <input type="hidden" th:field="*{tcSContract.payment_expiration_age}">
+          <input type="hidden" th:field="*{tcSContract.c_update_at}">
+          <input type="hidden" th:field="*{tcSContract.payment_control_id}">
+          <input type="hidden" th:field="*{tcSContract.payment_amount}">
+          <input type="hidden" th:field="*{tcSContract.p_update_at}">
+          <input type="hidden" th:field="*{select_cancel}">
+          <input type="hidden" th:field="*{cancel_date}">
+
+        </form>
+        </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/cm_common.css"/>
+  <link rel="stylesheet" href="/css/wc_common.css"/>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+  
+    <!-- jQuery -->
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <!-- jQuery UI -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+    <!-- jQuery local -->
+    <script src="/js/wc_reference.js"></script>
+    
+  <title>終身医療　契約照会画面</title>
+</head>
+<body>
+
+
+  
+  <input type="hidden" id="screen_info" th:value="${screen_info}">
+  <!-- 解約・取消　入力画面を表示する（screen_info == 'input'　の場合） -->
+  <div th:if="${screen_info == 'input'}"><div th:include="wc_k_input :: k_input"></div></div>
+
+  <!-- 解約・取消　確認画面を表示する（screen_info == 'confirmation'　の場合） -->
+  <div th:if="${screen_info == 'confirmation'}"><div th:include="wc_k_confirmation :: k_confirmation"></div></div>
+
+
+  <header class="Header">
+    <div class="Header__inner">
+      <a href="/cm/task">ダミー保険事務処理システム</a>
+      <div th:if="${screen_info == 'input'}">
+        <form th:method="post" th:action="@{/wc/s/list}" th:object="${wcSSearch}">
+          <input type="hidden" th:field="*{insured_person_id_str}">
+          <button class="btn btn-link btn-link-return btn_large">戻る</button>
+        </form>
+      </div>
+      <div th:if="${screen_info != 'input'}">
+        <button class="btn btn-link btn-link-return btn_large">戻る,</button>
+      </div>
+    </div>
+  </header>
+
+
+  <div class="container">
+    <h1 class="text-center title">終身医療  契約照会画面</h1>
+  </div>
+  
+  <div class="container">
+    <!-- <div id="inputArea" th:each="wcSReference:${wcSReference}" th:object="${wcSReference}">  -->
+    <div id="inputArea" th:object="${wcKInput.wcSReference}">
+    <!--    <form th:method="post" th:action="@{/wc/completion}" th:object="${wcSReference}">  -->
+
+        <div id="tableLeftArea">
+          <table class="table_left">
+            <caption class="caption-com"
+                  th:text="|被保険者情報　　※最終更新日：*{#temporals.format(ip_update_at, 'yyyy/MM/dd HH:mm')}|">
+            </caption>
+            <tbody>
+              <tr class="table_tr">
+                <th class="table_th">
+                  <div class="table_form">
+                    <div th:text="被保険者番号"></div>
+                  </div>
+                </th>
+                <td class="table_form">
+                  <div th:text="*{insured_person_id}"></div>
+                </td>
+              </tr>
+              <tr class="table_tr">
+                <th class="table_th">
+                  <div class="table_form">
+                    被保険者氏名_漢字
+                  </div>
+                </th>
+                <td class="table_form">
+                  <div th:text="*{insured_person_name_kanji}"></div>
+                </td>
+              </tr>
+              <tr class="table_tr">
+                <th class="table_th">
+                  <div class="table_form">
+                    被保険者氏名_カナ
+                  </div>
+                </th>
+                <td class="table_form">
+                  <div th:text="*{insured_person_name_kana}"></div>
+                </td>
+              </tr>
+              <tr class="table_tr">
+                <th class="table_th">
+                  <div class="table_form">
+                    生年月日
+                  </div>
+                </th>
+                <td class="table_form">
+                  <div th:text=  "*{#strings.substring(insured_person_birth_date,0,4)} + '/'
+                                   + *{#strings.substring(insured_person_birth_date,4,6)} + '/'
+                                   + *{#strings.substring(insured_person_birth_date,6,8)}">
+                  </div>
+                </td>
+              </tr>
+              <tr class="table_tr bottom_row_radius">
+                <th class="table_th">
+                  <div class="table_form">
+                    性別
+                  </div>
+                </th>
+                <td class="table_form">
+                  <div th:if="*{insured_person_sex=='1'}"><div th:text="男性"></div></div>
+                  <div th:if="*{insured_person_sex=='2'}"><div th:text="女性"></div></div>
+                </td>
+              </tr>
+              
+            </tbody>
+          </table>
+          
+          
+          <table class="table_left" th:if="*{payment_control_id != 0}">
+            <caption class="caption-com"
+                  th:text="|支払情報　　※最終更新日：*{#temporals.format(p_update_at, 'yyyy/MM/dd HH:mm')}|">
+            </caption>
+            <tbody>
+              <tr class="table_tr">
+                <th class="table_th">
+                  <div class="table_form">
+                    <div th:text="支払管理番号"></div>
+                  </div>
+                </th>
+                <td class="table_form">
+                  <div th:text="*{payment_control_id}"></div>
+                </td>
+              </tr>
+              <tr class="table_tr">
+                <th class="table_th">
+                  <div class="table_form">
+                    支払額
+                  </div>
+                </th>
+                <td class="table_form">
+                  <div th:text="|*{#numbers.formatInteger(payment_amount, 3, 'COMMA')}円|"></div>
+                </td>
+              </tr>
+              
+            </tbody>
+          </table>
+          
+
+          
+        </div>
+        
+        <div id="tableRightArea">
+          <table class="table_right">
+            <caption class="caption-com"
+               th:text="|契約情報　　※最終更新日：*{#temporals.format(c_update_at, 'yyyy/MM/dd HH:mm')}|">
+            </caption>
+            <tbody>
+              <tr class="table_tr">
+                <th class="table_th">
+                  <div class="table_form">
+                    契約番号
+                  </div>
+                </th>
+                <td class="table_form">
+                  <div th:text="*{contract_id}"></div>
+                </td>
+              </tr>
+              <tr class="table_tr">
+                <th class="table_th">
+                  <div class="table_form">
+                    契約履歴番号
+                  </div>
+                </th>
+                <td class="table_form">
+                  <div th:text="*{contract_history_id}"></div>
+                </td>
+              </tr>
+              <tr class="table_tr">
+                <th class="table_th">
+                  <div class="table_form">
+                    契約開始日
+                  </div>
+                </th>
+                <td class="table_form">
+                  <div id="contract_start_date"
+                        th:text=  "*{#strings.substring(contract_start_date,0,4)} + '/'
+                                + *{#strings.substring(contract_start_date,4,6)} + '/'
+                                + *{#strings.substring(contract_start_date,6,8)}">
+                  </div>
+                </td>
+              </tr>
+              <tr class="table_tr">
+                <th class="table_th">
+                  <div class="table_form">
+                    契約終了日
+                  </div>
+                </th>
+                <td class="table_form">
+                  <div th:if="*{contract_end_date != 0}">
+                      <div th:text=  "*{#strings.substring(contract_end_date,0,4)} + '/'
+                                    + *{#strings.substring(contract_end_date,4,6)} + '/'
+                                    + *{#strings.substring(contract_end_date,6,8)}">
+                      </div>
+                  </div>
+                  <div th:if="*{contract_end_date == 0}">
+                      <div th:text=""></div>
+                  </div>
+                </td>
+              </tr>
+              <tr class="table_tr">
+                <th class="table_th">
+                  <div class="table_form">
+                    契約終了事由
+                  </div>
+                </th>
+                <td class="table_form">
+                  <div th:text="*{contract_end_reason}"></div>
+                </td>
+              </tr>
+              <tr class="table_tr">
+                <th class="table_th">
+                  <div class="table_form">
+                    契約満期日
+                  </div>
+                </th>
+                <td class="table_form">
+                  <div th:text="終身"></div>
+                </td>
+              </tr>
+              <tr class="table_tr">
+                <th class="table_th">
+                  <div class="table_form">
+                    保障種類
+                  </div>
+                </th>
+                <td class="table_form">
+                  <div th:text="終身医療"></div>
+                </td>
+              </tr>
+              <tr class="table_tr">
+                <th class="table_th">
+                  <div class="table_form">
+                    加入年齢
+                  </div>
+                </th>
+                <td class="table_form">
+                  <div id="entry_age" th:text="|*{entry_age} 歳|"></div>
+                </td>
+              </tr>
+              <tr class="table_tr">
+                <th class="table_th">
+                  <div class="table_form">
+                    払込方法
+                  </div>
+                </th>
+                <td class="table_form">
+                  <div th:if="*{payment_method=='1'}">
+                    <div th:text="月払"></div>
+                  </div>
+                  <div th:if="*{payment_method=='3'}">
+                    <div th:text="年払"></div>
+                  </div>
+                </td>
+              </tr>
+              <tr class="table_tr">
+                <th class="table_th">
+                  <div class="table_form">
+                    入院日額
+                  </div>
+                </th>
+                <td class="table_form">
+                  <div th:text="|*{insurance_money} 円|"></div>
+                </td>
+              </tr>
+              <tr class="table_tr">
+                <th class="table_th">
+                  <div class="table_form">
+                    掛金
+                  </div>
+                </th>
+                <td class="table_form">
+                  <div th:text="|*{premium} 円|"></div>
+                </td>
+              </tr>
+          
+            </tbody>
+          </table>
+        </div>
+
+
+      <!-- </form>  -->
+      
+      <div id="confirmation_btn" class="confirm" >
+        <button id="confirmBtn" class="confirm_btn js-open">解約・取消</button>
+      </div>
+      
+      
+    </div>
+      
+  </div>
+    
+
+  <script src="/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -4,207 +4,207 @@
 <link rel="stylesheet" href="/css/bootstrap.min.css" />
 <link rel="stylesheet" href="/css/tc_common.css" />
 <link rel="stylesheet"
-	href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 
 <!-- jQuery -->
 <script src="/js/jquery-3.6.0.min.js"></script>
 <!-- jQuery UI -->
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+    src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
 
 <title>定期医療（加入） 完了画面</title>
 </head>
 
 <body>
-	<header class="Header">
-		<div class="Header__inner">
-			<a href="/cm/security">ダミー保険事務処理システム</a> <a href="/cm/security">保障種類選択画面へ戻る</a>
-		</div>
-	</header>
+    <header class="Header">
+        <div class="Header__inner">
+            <a href="/cm/security">ダミー保険事務処理システム</a> <a href="/cm/security">保障種類選択画面へ戻る</a>
+        </div>
+    </header>
 
-	<div class="container">
-		<div class="title">定期医療（加入）に加入しました</div>
-	</div>
+    <div class="container">
+        <div class="title">定期医療（加入）に加入しました</div>
+    </div>
 
-	<div class="l-base_completion">
-		<form th:method="post" th:action="@{/tc/completion}"
-			th:object="${tcCompletion}" class="Form-wrap_completion">
-			<table class="table_completion">
-				<tr>
-					<td class="td_completion">
-						<div class="Box-flame">
-							<table class="Form-tbl">
-								<caption class="caption-com" th:text="|被保険者情報　${iuComment}"></caption>
-								<tbody>
+    <div class="l-base_completion">
+        <form th:method="post" th:action="@{/tc/completion}"
+            th:object="${tcCompletion}" class="Form-wrap_completion">
+            <table class="table_completion">
+                <tr>
+                    <td class="td_completion">
+                        <div class="Box-flame">
+                            <table class="Form-tbl">
+                                <caption class="caption-com" th:text="|被保険者情報　${iuComment}"></caption>
+                                <tbody>
 
-									<tr class="Form-tbl__tr">
-										<th class="Form-tbl__th_comp"><div class="Form-name">
-												<div th:text="被保険者番号"></div>
-											</div></th>
-										<td class="Form-tbl__td_completion">
-											<div th:text="*{tcInsuredPersons.insured_person_id}"></div>
-										</td>
-									</tr>
+                                    <tr class="Form-tbl__tr">
+                                        <th class="Form-tbl__th_comp"><div class="Form-name">
+                                                <div th:text="被保険者番号"></div>
+                                            </div></th>
+                                        <td class="Form-tbl__td_completion">
+                                            <div th:text="*{tcInsuredPersons.insured_person_id}"></div>
+                                        </td>
+                                    </tr>
 
-									<tr class="Form-tbl__tr">
-										<th class="Form-tbl__th_comp"><div class="Form-name">被保険者氏名（漢字）</div></th>
-										<td class="Form-tbl__td_completion">
-											<div th:text="*{tcInsuredPersons.insured_person_name_kanji}"></div>
-										</td>
-									</tr>
+                                    <tr class="Form-tbl__tr">
+                                        <th class="Form-tbl__th_comp"><div class="Form-name">被保険者氏名（漢字）</div></th>
+                                        <td class="Form-tbl__td_completion">
+                                            <div th:text="*{tcInsuredPersons.insured_person_name_kanji}"></div>
+                                        </td>
+                                    </tr>
 
-									<tr class="Form-tbl__tr">
-										<th class="Form-tbl__th_comp"><div class="Form-name">被保険者氏名（カナ）</div></th>
-										<td class="Form-tbl__td_completion">
-											<div th:text="*{tcInsuredPersons.insured_person_name_kana}"></div>
-										</td>
-									</tr>
+                                    <tr class="Form-tbl__tr">
+                                        <th class="Form-tbl__th_comp"><div class="Form-name">被保険者氏名（カナ）</div></th>
+                                        <td class="Form-tbl__td_completion">
+                                            <div th:text="*{tcInsuredPersons.insured_person_name_kana}"></div>
+                                        </td>
+                                    </tr>
 
-									<tr class="Form-tbl__tr">
-										<th class="Form-tbl__th_comp"><div class="Form-name">生年月日</div></th>
+                                    <tr class="Form-tbl__tr">
+                                        <th class="Form-tbl__th_comp"><div class="Form-name">生年月日</div></th>
 
-										<td class="Form-tbl__td_completion">
-											<div th:text="*{tcInsuredPersons.insured_person_birth_date}">
-											</div>
-										</td>
-									</tr>
+                                        <td class="Form-tbl__td_completion">
+                                            <div th:text="*{tcInsuredPersons.insured_person_birth_date}">
+                                            </div>
+                                        </td>
+                                    </tr>
 
-									<tr class="Form-tbl__tr">
-										<th class="Form-tbl__th_comp"><div class="Form-name">性別</div></th>
-										<td class="Form-tbl__td_completion">
+                                    <tr class="Form-tbl__tr">
+                                        <th class="Form-tbl__th_comp"><div class="Form-name">性別</div></th>
+                                        <td class="Form-tbl__td_completion">
 
-											<div th:if="*{tcInsuredPersons.insured_person_sex=='1'}">
-												<div th:text="男性"></div>
-											</div>
-											<div th:if="*{tcInsuredPersons.insured_person_sex=='2'}">
-												<div th:text="女性"></div>
-											</div>
+                                            <div th:if="*{tcInsuredPersons.insured_person_sex=='1'}">
+                                                <div th:text="男性"></div>
+                                            </div>
+                                            <div th:if="*{tcInsuredPersons.insured_person_sex=='2'}">
+                                                <div th:text="女性"></div>
+                                            </div>
 
-										</td>
-									</tr>
+                                        </td>
+                                    </tr>
 
 
-								</tbody>
-							</table>
-						</div>
+                                </tbody>
+                            </table>
+                        </div>
 
-					</td>
-					<td>
-						<table class="between-table">
-							<tr>
-								<td></td>
-							</tr>
-						</table>
-					</td>
-					<td class="td_completion">
-						<div class="Box-flame">
-							<table class="Form-tbl">
-								<caption class="caption-com">契約情報</caption>
-								<tbody>
+                    </td>
+                    <td>
+                        <table class="between-table">
+                            <tr>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td class="td_completion">
+                        <div class="Box-flame">
+                            <table class="Form-tbl">
+                                <caption class="caption-com">契約情報</caption>
+                                <tbody>
 
-									<tr class="Form-tbl__tr">
-										<th class="Form-tbl__th_comp"><div class="Form-name">契約番号</div></th>
-										<td class="Form-tbl__td_completion"><div
-												th:text="*{tcContracts.contract_id}"></div></td>
-									</tr>
-									<tr class="Form-tbl__tr">
-										<th class="Form-tbl__th_comp"><div class="Form-name">契約履歴番号</div></th>
-										<td class="Form-tbl__td_completion"><div
-												th:text="*{tcContracts.contract_history_id}"></div></td>
-									</tr>
-									<tr class="Form-tbl__tr">
-										<th class="Form-tbl__th_comp"><div class="Form-name">契約開始日</div></th>
-										<td class="Form-tbl__td_completion">
-											<div th:text="*{tcContracts.contract_start_date}"></div>
-										</td>
-									</tr>
+                                    <tr class="Form-tbl__tr">
+                                        <th class="Form-tbl__th_comp"><div class="Form-name">契約番号</div></th>
+                                        <td class="Form-tbl__td_completion"><div
+                                                th:text="*{tcContracts.contract_id}"></div></td>
+                                    </tr>
+                                    <tr class="Form-tbl__tr">
+                                        <th class="Form-tbl__th_comp"><div class="Form-name">契約履歴番号</div></th>
+                                        <td class="Form-tbl__td_completion"><div
+                                                th:text="*{tcContracts.contract_history_id}"></div></td>
+                                    </tr>
+                                    <tr class="Form-tbl__tr">
+                                        <th class="Form-tbl__th_comp"><div class="Form-name">契約開始日</div></th>
+                                        <td class="Form-tbl__td_completion">
+                                            <div th:text="*{tcContracts.contract_start_date}"></div>
+                                        </td>
+                                    </tr>
 
-<!-- 									<tr class="Form-tbl__tr"> -->
-<!-- 										<th class="Form-tbl__th_comp"><div class="Form-name">契約終了日</div></th> -->
-<!-- 										<td class="Form-tbl__td_completion"> -->
-<!-- 											<div th:text="*{tcContracts.contract_end_date}"></div> -->
-<!-- 										</td> -->
-<!-- 									</tr> -->
-									<!--                   <tr class="Form-tbl__tr"> -->
-									<!--                       <th class="Form-tbl__th_comp"><div class="Form-name">契約終了事由</div></th> -->
-									<!--                       <td class="Form-tbl__td_completion"><div th:text="*{tcContracts.contract_end_reason}"></div></td> -->
-									<!--                   </tr> -->
-									<tr class="Form-tbl__tr">
-										<th class="Form-tbl__th_comp"><div class="Form-name">契約満期日</div></th>
-										<td class="Form-tbl__td_completion">
-											<div th:text="*{tcContracts.contract_maturity_date}"></div>
-										</td>
-									</tr>
-									<tr class="Form-tbl__tr">
-										<th class="Form-tbl__th_comp"><div class="Form-name">保障種類</div></th>
-										<td class="Form-tbl__td_completion"><div th:text="定期医療"></div></td>
-									</tr>
+<!--                                     <tr class="Form-tbl__tr"> -->
+<!--                                         <th class="Form-tbl__th_comp"><div class="Form-name">契約終了日</div></th> -->
+<!--                                         <td class="Form-tbl__td_completion"> -->
+<!--                                             <div th:text="*{tcContracts.contract_end_date}"></div> -->
+<!--                                         </td> -->
+<!--                                     </tr> -->
+                                    <!--                   <tr class="Form-tbl__tr"> -->
+                                    <!--                       <th class="Form-tbl__th_comp"><div class="Form-name">契約終了事由</div></th> -->
+                                    <!--                       <td class="Form-tbl__td_completion"><div th:text="*{tcContracts.contract_end_reason}"></div></td> -->
+                                    <!--                   </tr> -->
+                                    <tr class="Form-tbl__tr">
+                                        <th class="Form-tbl__th_comp"><div class="Form-name">契約満期日</div></th>
+                                        <td class="Form-tbl__td_completion">
+                                            <div th:text="*{tcContracts.contract_maturity_date}"></div>
+                                        </td>
+                                    </tr>
+                                    <tr class="Form-tbl__tr">
+                                        <th class="Form-tbl__th_comp"><div class="Form-name">保障種類</div></th>
+                                        <td class="Form-tbl__td_completion"><div th:text="定期医療"></div></td>
+                                    </tr>
 
-									<tr class="Form-tbl__tr">
-										<th class="Form-tbl__th_comp"><div class="Form-name">加入年齢</div></th>
-										<td class="Form-tbl__td_completion">
-											<div th:text="|*{tcContracts.entry_age}　歳|"></div>
-										</td>
-									</tr>
-									<tr class="Form-tbl__tr">
-										<th class="Form-tbl__th_comp"><div class="Form-name">払込方法</div></th>
-										<td class="Form-tbl__td_completion">
-											<div th:if="*{tcContracts.payment_method=='1'}">
-												<div th:text="月払"></div>
-											</div>
-											<div th:if="*{tcContracts.payment_method=='3'}">
-												<div th:text="年払"></div>
-											</div>
-										</td>
-									</tr>
-									<tr class="Form-tbl__tr">
-										<th class="Form-tbl__th_comp"><div class="Form-name">入院日額</div></th>
-										<td class="Form-tbl__td_completion">
-											<div
-												th:text="|*{#numbers.formatInteger(tcContracts.insurance_money, 3, 'COMMA')}　円|"></div>
-										</td>
-									</tr>
-									<tr class="Form-tbl__tr">
-										<th class="Form-tbl__th_comp"><div class="Form-name">掛金</div></th>
-										<td class="Form-tbl__td_completion">
-											<div
-												th:text="|*{#numbers.formatInteger(tcContracts.premium, 3, 'COMMA')}　円|"></div>
-										</td>
-									</tr>
-									<tr class="Form-tbl__tr">
-										<th class="Form-tbl__th_comp"><div class="Form-name">掛金払込期間</div></th>
-										<td class="Form-tbl__td_completion">
-											<div th:text="|*{tcContracts.premium_payment_term}　年|"></div>
-										</td>
-									</tr>
+                                    <tr class="Form-tbl__tr">
+                                        <th class="Form-tbl__th_comp"><div class="Form-name">加入年齢</div></th>
+                                        <td class="Form-tbl__td_completion">
+                                            <div th:text="|*{tcContracts.entry_age}　歳|"></div>
+                                        </td>
+                                    </tr>
+                                    <tr class="Form-tbl__tr">
+                                        <th class="Form-tbl__th_comp"><div class="Form-name">払込方法</div></th>
+                                        <td class="Form-tbl__td_completion">
+                                            <div th:if="*{tcContracts.payment_method=='1'}">
+                                                <div th:text="月払"></div>
+                                            </div>
+                                            <div th:if="*{tcContracts.payment_method=='3'}">
+                                                <div th:text="年払"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="Form-tbl__tr">
+                                        <th class="Form-tbl__th_comp"><div class="Form-name">入院日額</div></th>
+                                        <td class="Form-tbl__td_completion">
+                                            <div
+                                                th:text="|*{#numbers.formatInteger(tcContracts.insurance_money, 3, 'COMMA')}　円|"></div>
+                                        </td>
+                                    </tr>
+                                    <tr class="Form-tbl__tr">
+                                        <th class="Form-tbl__th_comp"><div class="Form-name">掛金</div></th>
+                                        <td class="Form-tbl__td_completion">
+                                            <div
+                                                th:text="|*{#numbers.formatInteger(tcContracts.premium, 3, 'COMMA')}　円|"></div>
+                                        </td>
+                                    </tr>
+                                    <tr class="Form-tbl__tr">
+                                        <th class="Form-tbl__th_comp"><div class="Form-name">掛金払込期間</div></th>
+                                        <td class="Form-tbl__td_completion">
+                                            <div th:text="|*{tcContracts.premium_payment_term}　年|"></div>
+                                        </td>
+                                    </tr>
 
-									<!--                   <tr class="Form-tbl__tr"> -->
-									<!--                       <th class="Form-tbl__th_comp"><div class="Form-name">契約期間</div></th> -->
-									<!--                       <td class="Form-tbl__td_completion"> -->
-									<!--                       	<div th:text="|*{tcContracts.contract_term}　年|"></div> -->
-									<!--                       </td> -->
-									<!--                   </tr> -->
-									<!--                   <tr class="Form-tbl__tr"> -->
-									<!--                     <th class="Form-tbl__th_comp"><div class="Form-name">払込満了年齢</div></th> -->
-									<!--                     <td class="Form-tbl__td_completion"> -->
-									<!--                       <div th:if="*{tcContracts.payment_expiration_age!=99}"> -->
-									<!--                         <div th:text="|*{tcContracts.payment_expiration_age}　歳|"></div> -->
-									<!--                       </div> -->
-									<!--                       <div th:if="*{tcContracts.payment_expiration_age==99}"> -->
-									<!--                         <div th:text="終身"> -->
-									<!--                       </div> -->
-									<!--                       </div> -->
-									<!--                     </td> -->
-									<!--                   </tr> -->
-								</tbody>
-							</table>
-						</div>
-					</td>
-				</tr>
-			</table>
-		</form>
-	</div>
+                                    <!--                   <tr class="Form-tbl__tr"> -->
+                                    <!--                       <th class="Form-tbl__th_comp"><div class="Form-name">契約期間</div></th> -->
+                                    <!--                       <td class="Form-tbl__td_completion"> -->
+                                    <!--                           <div th:text="|*{tcContracts.contract_term}　年|"></div> -->
+                                    <!--                       </td> -->
+                                    <!--                   </tr> -->
+                                    <!--                   <tr class="Form-tbl__tr"> -->
+                                    <!--                     <th class="Form-tbl__th_comp"><div class="Form-name">払込満了年齢</div></th> -->
+                                    <!--                     <td class="Form-tbl__td_completion"> -->
+                                    <!--                       <div th:if="*{tcContracts.payment_expiration_age!=99}"> -->
+                                    <!--                         <div th:text="|*{tcContracts.payment_expiration_age}　歳|"></div> -->
+                                    <!--                       </div> -->
+                                    <!--                       <div th:if="*{tcContracts.payment_expiration_age==99}"> -->
+                                    <!--                         <div th:text="終身"> -->
+                                    <!--                       </div> -->
+                                    <!--                       </div> -->
+                                    <!--                     </td> -->
+                                    <!--                   </tr> -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
 </body>
 </html>

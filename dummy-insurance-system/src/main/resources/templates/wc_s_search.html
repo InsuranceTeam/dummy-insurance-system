@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/cm_common.css"/>
+  <link rel="stylesheet" href="/css/wc_common.css"/>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+  
+    <!-- jQuery -->
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <!-- jQuery UI -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+    <!-- jQuery local -->
+    <script src="/js/wc_input.js"></script>
+  <title>終身医療　被保険者検索画面</title>
+</head>
+<body>
+<!-- 終身医療の入力画面はここに作成願います -->
+  <nav class="navbar navbar-inverse">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/cm/task">ダミー保険処理システム</a>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <h1 class="text-center title">終身医療  被保険者検索画面</h1>
+  </div>
+  
+  <div class="container">
+    <div id="inputArea">
+      <form th:method="post" th:action="@{/wc/s/list}" th:object="${wcSSearch}">
+   
+      <div class="card-body wc_search_input_area">
+
+          <div class=" row input_row border_green">
+            <div class="input_title border_radius_all">
+              <div class="control-label input_title_label" >被保険者番号</div>
+            </div>
+            <div class="input_form_name">
+              <input class="form_area " type="text" name="personId" 
+                      id="personId" th:field="*{insured_person_id_str}"/>
+                      <!-- pattern="^[0-9]+$" -->
+            </div>
+          </div>
+          
+          <div id="errorMsgArea" class="errorInfo">
+            <div id="errorMsg" class="text-danger" th:if="${#fields.hasErrors('insured_person_id_str')}"
+                th:errors="*{insured_person_id_str}">
+            </div>
+          </div>
+
+      </div>
+      
+      <div id="confirmation_btn" class="confirm" >
+        <button id="confirmBtn" class="confirm_btn">検索</button>
+      </div>
+      
+      </form>      
+    </div>
+  </div>
+    
+
+     <!-- <script src="/js/jquery-3.6.0.min"></script>  -->
+  <script src="/js/bootstrap.min.js"></script>
+</body>
+</html>

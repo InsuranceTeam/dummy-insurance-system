@@ -4,10 +4,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
 import org.apache.ibatis.binding.BindingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.ibm.icu.text.Transliterator;
 import com.insurance.app.domain.TlContracts;
 import com.insurance.app.domain.TlInput;
 import com.insurance.app.domain.TlInsuredPersons;
@@ -107,9 +110,16 @@ public class TlEntryService {
 
     tlInsuredPersons.setInsured_person_birth_date(tlInput.getInsured_person_birth_year()
         + tlInput.getInsured_person_birth_month() + tlInput.getInsured_person_birth_day());
-    tlInsuredPersons.setInsured_person_name_kana(tlInput.getInsured_person_name_kana());
     tlInsuredPersons.setInsured_person_name_kanji(tlInput.getInsured_person_name_kanji());
     tlInsuredPersons.setInsured_person_sex(tlInput.getInsured_person_sex());
+    
+    String hanKana;
+	Transliterator trans;
+	trans = Transliterator.getInstance("Hiragana-Katakana");
+	hanKana = trans.transliterate(tlInput.getInsured_person_name_kana());
+	trans = Transliterator.getInstance("Fullwidth-Halfwidth");
+	hanKana = trans.transliterate(hanKana);
+	tlInsuredPersons.setInsured_person_name_kana(hanKana);
 
   }
 
@@ -130,7 +140,7 @@ public class TlEntryService {
     tlContracts.setInsured_person_id(tlInsuredPersons.getInsured_person_id());
     tlContracts.setContract_start_date(strStart);
     tlContracts.setContract_end_date("00000000");
-    tlContracts.setContract_end_reason(" ");
+    tlContracts.setContract_end_reason("");
     tlContracts.setContract_maturity_date(strEnd);
     tlContracts.setSecurity_type("TL");
     tlContracts.setContract_history_id(10000);
